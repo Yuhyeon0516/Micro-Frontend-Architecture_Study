@@ -248,19 +248,19 @@
 
     -   단독으로 동작하는 앱이거나 독립적이고 범용적인 라이브러리에 어울리는 형태
 
-        ![싱글 레포지토리]()
+        ![싱글 레포지토리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/f3144f8c-5de9-47a0-ae1b-ca2428428794)
 
 -   멀티 레포지토리(Multirepo 또는 Polyrepo)
 
     -   여러개의 레포지토리가 서로 유기적으로 관계를 가지면서 개발하는 방식
 
-        ![멀티 레포지토리]()
+        ![멀티 레포지토리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/fbfa085f-0b54-4bd7-af40-32654f043677)
 
 -   모노 레포지토리(Monorepo)
 
     -   단일 레포지터리이면서 내부에 여러 패키지가 유기적으로 서로 관계를 가지면서 함께 개발하는 방식
 
-        ![모노 레포지토리]()
+        ![모노 레포지토리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/5e23337d-1d76-45be-b41a-5b9595323374)
 
 -   Monorepo의 특징
 
