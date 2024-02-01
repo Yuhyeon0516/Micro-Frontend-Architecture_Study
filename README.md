@@ -377,6 +377,79 @@
 
 -   yarn workspaces
 
+    -   yarn 1.x(classic)
+
+        -   시기상으로 yarn의 workspaces 기능이 npm의 workspaces 기능보다 먼저 나왔음
+        -   yarn 1.0부터 기본적으로 사용이 가능함
+        -   `npm link`와 마찬가지로 `yarn link`를 대신하여 선언적으로 사용할 수 있음
+        -   package.json 파일의 workspaces 속성을 통해 정의(npm과 동일)
+        -   프로젝트 내의 모든 패키지의 의존성이 함께 설치되고 관리되어 충돌이 적고, 최적화에 유리함
+        -   최종적으로 npm과 같은 방식이기 때문에 같은 한계를 지니고 있음
+        -   yarn 1.x에서는 root project에 `private:true`가 설정되어 있어야함
+
+        -   `./yarn-classic-workspaces-example`
+
+            ```shell
+            yarn init -y -p
+            # -p flag는 private: true로 설정
+            mkdir packages packages/a packages/b
+            cd packages/a
+            yarn init -y
+            cd ..
+            cd b
+            yarn init -y
+            # 이후 root project에서 workspaces를 설정
+            yarn
+            # npm install과 같은 기능
+            yarn workspace a add axios
+            # a라는 workspace에 axios를 install
+            yarn workspace a start
+            # a라는 workspace의 start script 실행
+            yarn workspaces run start
+            # 모든 workspace의 start script 실행
+            ```
+
+    -   yarn berry
+
+        -   yarn berry는 yarn의 두 번째 버전이고, 2.x부터 시작하여 이 글을 적는 현재 4.1.0 버전이다.
+        -   기본적으로 명시적인 의존 관계를 나타내야 사용이 가능하다.(약간의 불편함?)
+        -   `node_modules`에 패키지를 저장하는 방식이 아니라 패키지를 압축하여 한개의 파일을 `.yarn/cache`폴더에 수평적으로 저장한다.
+            -   이러한 방식을 Plug'n'Play(PnP)라고 부른다.
+            -   수평적으로 존재하기 때문에 빠르게 찾을 수 있다.
+            -   압축파일을 설치하기 때문에 파일 개수가 감소하여 설치가 빠르며, Zero Install을 이용하여 저장소에서 함께 관리할 수도 있다.
+            -   팬텀 디펜던시가 발생하지 않는다.
+        -   아쉬운점
+
+            -   PnP는 기존의 패키지 관리 방식과는 다르기 때문에 어색함
+                -   IDE에서 직접 사용하는 많은 도구들을 SDK를 통해 우회 호출할 수 있도록 추가적인 설정이 필요함
+            -   Install이 항상 빠르지만은 않음
+            -   Zero Install을 이용하여 압축파일들을 가지고 작업하면, 저장소 자체가 매우 커질 수 있음
+                -   Zero Install이라고 정말 설치하지 않는것은 아님
+
+        -   `./yarn-berry-workspaces-example`
+
+            ```shell
+            corepack enable
+            yarn init -2 -w
+            # -2 flag로 yarn-berry가 사용되게 되며, -w로 workspaces중 root라고 정의해준다.
+            mkdir packages/a packages/b
+            cd packages/a
+            yarn init
+            cd ..
+            cd b
+            yarn init
+            cd ...
+            yarn workspace a add axios
+            yarn config set enableGlobalCache false
+            yarn
+            yarn workspace a start
+            yarn workspace a remove axios
+            yarn workspace b add axios
+            yarn workspace a start
+            ```
+
+-   pnpm workspaces
+
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Build System Tool)
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Transfile과 Bundling Tool)
