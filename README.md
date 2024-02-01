@@ -285,3 +285,102 @@
     -   많은 코드가 변경될 경우 태스크 실행이 매우 느려질 수 있습니다.
     -   저장소 자체가 빠르게 무거워질 수 있습니다.
     -   모든 코드가 밀집되어 있어 사소한 문제가 크게 확대될 가능성이 있습니다.
+
+### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Package Manager)
+
+-   Package Manager의 필요성
+
+    -   다른 사람이 만들어서 공개한 도구를 가져다가 쓰려면 나의 프로젝트로 가지고 와야한다.
+    -   소스 코드를 작성하다가 이미 다른 누군가 작성한 코드가 라이브러리로 제공되고 있습니다. 이를 가져다 쓰려면 나의 프로젝트로 가지고 와야한다.
+    -   나의 프로젝트로 가지고 오는 설치 과정 그리고 프로젝트에 무엇이 필요한지 기록해서 관리하는 과정
+    -   이러한 이유로 Package Manager가 꼭 필요하고, Default Package Manager는 NodeJS를 설치할 때 함께 설치되는 `npm`이다.
+
+-   npm
+
+    -   사람들은 기본 설치된 npm을 주로 이용했었음
+    -   npm 저장소에 npm 패키지를 만들어 올렸음
+    -   나의 프로젝트에 패키지를 설치하고 정의해두었음
+    -   의존성 문제들이 있었지만, 굉장히 큰 문제이나 사람들은 큰 문제가 아니라고 생각하고 다들 잘 이용하고 있다.
+
+-   yarn classic
+
+    -   npm 의 동작방식을 그대로 가져가면서 아쉬운 부분들을 해결하고자 Facebook, Google 등이 함께 만든 yarn 이 출시되었습니다.
+    -   Lock 파일이라는 개념을 도입해서 일관적인 의존성을 재설치 할 수 있었다.
+    -   보안도 향상
+    -   병렬 설치 기능으로 성능을 향상 시킴
+    -   워크스페이스 기능을 도입
+
+-   Phantom Dependency
+
+    -   npm & yarn classic 모두 node_modules의 구조가 플랫하기 때문에 내가 설치하지 않은 의존성을 사용할 수 있게 되었습니다.
+    -   이로 인해 많은 위험이 있을 수 있고, 현재도 이 리스크는 가지고 있다.
+
+-   pnpm
+
+    -   기존에 패키지 매니저에 실망감을 가지고 있는 개발자가 pnpm 을 출시합니다.
+    -   하드 링크와 소프트 링크를 적절히 사용해서 성능 향성과 디스크 효율성을 강조합니다.
+    -   그리고 npm v3 의 플랫한 구조를 버리고 중첩 구조를유지하면서 문제를 해결합니다.(Phantom Dependency를 해결)
+    -   워크스페이스 기능을 가지고 있음
+
+-   yarn berry
+
+    -   yarn 의 첫번째 버전과 다른 완전히 새로운 버전이 2020년 출시됨
+    -   node_modules 를 사용하지 않고 압축파일을 사용하는 완전히 새로운 개념을 사용합니다. 이를 통해서 설치 시간을 최소화하고 설치하지 않아도 사용 가능한 개념을 선보입니다.
+    -   엄격한 의존 관계로 인해 팬텀 디펜던시와 같은 문제가 발생하지 않습니다.
+    -   워크스페이스 기능이 계속 존재함
+
+-   npm workspaces 실습
+
+    -   `./npm-link-example`
+
+        -   Monorepo가 나오기 전에는 아래와 같은 `npm link`를 많이 활용했음
+
+            ```shell
+            mkdir npm-link-example
+            cd npm-link-example
+            npm init -y
+            mkdir package-a
+            cd package-a
+            npm init -y
+            cd ..
+            mkdir node_modules
+            ln -s ../package-a ./node_modules/package-a
+            # 링크되는 위치(오른쪽) 기준으로 실제 위치(왼쪽) 작성
+            mkdir package-b
+            cd package-b
+            npm init -y
+            cd ..
+            npm link ./package-b
+            # ln -s와 같은 역할을 npm에서 제공
+            # 자동으로 현재 root 경로에 node_modules로 link해줌
+            ```
+
+    -   `./npm-workspaces-example`
+
+        -   workspaces 기능이 나오면서 `npm link`를 수동으로 할 필요 없어짐
+
+            -   workspaces의 경우 `package.json`의 `workspaces` 속성을 통해 정의
+
+                ```shell
+                mkdir npm-workspaces-example
+                cd npm-workspaces-example
+                npm init -y
+                npm init -y -w ./packages/a
+                # ./packages/a가 생성되고 그 안에 npm init -y가 자동으로 되며 -w flag로 인하여 root project에 자동으로 workspaces로 연동이 된다.
+                npm install -w a axios
+                # a workspace에 axios를 install하겠다는 뜻
+                npm start -w a
+                # a workspace를 실행하겠다는 뜻(a workspace의 package.json내에 start script가 실행됨)
+                npm start --ws
+                # root project에 연동된 workspaces 전부 start script를 실행함
+                ```
+
+-   yarn workspaces
+
+### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Build System Tool)
+
+### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Transfile과 Bundling Tool)
+
+### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
+
+## Micro Frontends 개념 심화 학습(분해와 통합을 위한 여러 기술 비교)
