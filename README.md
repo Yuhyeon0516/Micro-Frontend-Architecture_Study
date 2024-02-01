@@ -429,6 +429,8 @@
         -   `./yarn-berry-workspaces-example`
 
             ```shell
+            mkdir yarn-berry-workspaces-example
+            cd yarn-berry-workspaces-example
             corepack enable
             yarn init -2 -w
             # -2 flag로 yarn-berry가 사용되게 되며, -w로 workspaces중 root라고 정의해준다.
@@ -449,6 +451,35 @@
             ```
 
 -   pnpm workspaces
+
+    -   pnpm이 추구하는 철학
+
+        -   빠르고, 효율적인 패키지 매니저
+        -   모노레포를 지원하고, 평탄하지 않은 node_modules가 기본이기 때문에 엄격한 의존 관리가 가능
+        -   시스템 내에 단일 패키지 스토어에 모든 의존성을 보관하기 때문에 디스크 공간이 절약됨
+        -   필요한 의존성을 식별하여 스토어로 가져오고, 디렉토리 구조를 계산하여 하드 링크하는 과정을 가지기 때문에 설치 속도가 빠름
+        -   기본적으로 pnpm은 symlink를 사용하여 프로젝트의 직접적인 의존성만을 모듈 디렉토리의 루트로 추가합니다.
+
+    -   `./pnpm-workspaces-example`
+
+        ```shell
+        mkdir pnpm-workspaces-example
+        cd pnpm-workspaces-example
+        corepack enable
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir packages packages/a packages/b
+        cd packages/a
+        pnpm init
+        cd ..
+        cd b
+        pnpm init
+        cd ...
+        pnpm --filter a add axios
+        pnpm --filter a start
+        pnpm --filter a remove axios
+        pnpm --filter b add axios
+        ```
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Build System Tool)
 
