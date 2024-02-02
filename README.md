@@ -483,6 +483,137 @@
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Build System Tool)
 
+-   패키지 매니저만으로 모노레포를 운영할 수 있을까?
+
+    -   npm, yarn classic, yarn berry, pnpm 에는 전부 Workspaces 기능이 있고 이 기능은 대체로 각 패키지에 독립적으로 무언가를 수행하거나, 전체 패키지를 순회하며 무언가를 수행할 수 있다.
+    -   아마도 작은 규모의 모노레포에서는 특별한 문제를 느끼지 않을 수 있습니다. 처음 도입하는 과정에서 느리지 않을 수 있기 때문입니다. 하지만 모노레포는 운영하면서 점점 커지게 되고 결국에는 모노레포를 사용하고 싶지 않을 정도로 느리고 불편해질 수 있다.
+    -   느리다는 것은 이런 것입니다. 모노레포 안에 패키지 A, B, C 가 있습니다. A 는 B 를 사용하고, B 는 C 를 사용합니다. C 의 변경으로 인해 B 와 A 도 영향을 받습니다. 빌드를 하거나 테스트를 할때도 이런 관계에 따라서 실행해야 할 부분이 결정됩니다. 하지만 항상 정확한 순서를 기억해서 빌드를 하거나 테스트를 해야합니다. 혹은 하지 않아도 되는 작업을 항상 해야한다.
+    -   결국 이렇게 패키지들의 작업 수행을 관리하고 효율적으로 수행하고 싶어진다.
+
+-   모노레포 빌드시스템 도구의 역할
+
+    -   작업의 선후 관계를 정의해서 수행하고, 캐싱을 통해 작업 실행 속도를 높이는 이유로 많은 모노레포 프로젝트에서 모노레포 도구를 사용한다.
+    -   오픈 소스 프로젝트에서도 모노레포를 활용하고 그 안의 여러가지 분석 버저닝 배포까지 모노레포 도구를 활용하는 것이 트랜드가 되었다.
+    -   작업 수행 속도를 높여 생산성에 도움을 주고, 패키지를 분석하는 도구를 제공하며, 기타 여러 패키지를 관리할 때 도움이 되는 기능을 가지고 있다.
+    -   이러한 툴에는 여러가지가 있고, JS/TS 프로젝트 뿐만이 아니라 다른 프로젝트에서 사용할 수 있는 도구들이 많이 있다.
+    -   프론트엔드 프로젝트로 Lerna, Nx, Rush, Turborepo를 학습할 예정이다.
+
+-   모노레포 빌드시스템 도구에서 우리가 집중해야할 주요 기능
+
+    -   프로젝트가 커지면 커질수록 태스크 실행을 효율적으로 관리하는 기능에 집중해야 한다.
+        -   Task 실행
+        -   Task 실행을 조율하는 기능
+        -   Task 실행 결과를 캐싱하는 방식
+
+-   lerna
+
+    -   최신 패키지 매니저들은 과거보다 좀더 많은 일들을 해주고 있지만, 초창기에 모노레포를 운영할 때는 사실상 필수적인 도구였음 (yarn workspaces + lerna)
+    -   지원 중단을 선언했다가, Nx 를 만들고 있는 Nrwl 이 Lerna 를 계속 유지 관리하기로 함
+    -   그래서 기존이 Lerna 의 기능에 Nx 의 기능이 추가된 형태로 변해옴
+        -   Task 관리, Cache 기능
+    -   여러 기능들을 Nx의 기능으로 실행하기 때문에 이제는 밀접하게 함께 사용되고 있음
+    -   여러 패키지를 관리하고 게시하는 기능으로 인해 많은 오픈소스 프로젝트에 사용해옴
+
+        -   패키지 게시, 패키지 변경 사항 체크, 릴리즈 노트 자동 생성 등
+
+    -   핵심 기능
+
+        -   Run Tasks
+
+            -   모노레포 안에는 수백, 수천 개의 패키지를 보유할 수 있으므로 모든(또는 일부) 프로젝트에 대해 스크립트를 실행할 수 있는 것은 핵심 기능임
+            -   모든 패키지에 스크립트 실행 - lerna run test
+            -   특정 패키지에 스크립트 실행 - lerna run test --scope=a
+            -   모든 패키지에 여러 스크립트 실행 - lerna run test,build
+            -   스크립트 순서가 필요하다면, nx 의 기능을 이용함 (lerna add-caching)
+
+        -   Cache Task Results
+
+            -   작업의 결과를 캐싱할 수 있습니다. 의도적인 변화가 있을 때만 작업을 재실행하는 기능은 nx 를 이용함 (lerna add-caching)
+            -   캐싱을 할 스크립트를 지정할 수 있고 이 내용은 nx.json 에 존재함
+            -   캐싱의 출력물을 지정하면 삭제하더라도, 패키지가 변하지 않으면 다시 생성하는 과정을 거치지 않고, 캐싱으로부터 바로 생성됨(빠르다)
+
+        -   Share Your Cache
+
+            -   캐시를 여러 머신에 분산할 수 있습니다. 직접 구현할 수 있겠지만, Nx Cloud 를 이용하면 별도의 구성없이 쉽게 사용이 가능함. 오픈 소스 프로젝트에서는 무료.
+            -   사용법은 nx-connect-to-nx-cloud
+
+        -   Explore the Project Graph
+
+            -   모노레포 안에 있는 모든 패키지 간의 의존성 그래프를 생성함.
+            -   Nx의 기능이고 사용법은 nx graph
+
+        -   Distribute Task Execution
+
+            -   레포지토리의 핵심이 수정되어 모든 작업을 CI 에서 실행해야 하는 경우, 성능을 개선할 수 있는 유일한 방법은 에이전트 작업을 더 추가하고 작업을 효율적으로 병렬화하는 것 뿐.
+            -   Nx Cloud에 연결하고(nx connect-to-nx-cloud), CI에서 DTE를 활성화 시킴(nx generate @nrwl/workspace:ci-workflow --ci=github)
+
+        -   Version and Publish
+
+            -   패키지의 버전을 증가시킬 수 있을 뿐만 아니라 패키지를 npm 에 게시할 수 있으며, 모든 방식으로 사용할 수 있도록 다양한 옵션을 제공
+            -   일반적으로 npm 게시를 하지 않는 패키지는 "private": true 를 정의합니다.
+            -   버전 증가 lerna version --no-private
+            -   npm 에 게시 lerna publish --no-private
+
+        -   Editor Integrations
+
+            -   VSCode에 Nx Console 확장 프로그램이 있음
+
+        -   Workspace Watching
+
+            -   파일 변경을 체크하여 명령을 실행할 수 있는 기능
+            -   lerna watch -- echo \$LERNA_PACKAGE_NAME \$LERNA_FILE_CHANGES
+            -   lerna watch -- lerna run build --scope=\$LERNA_PACKAGE_NAME
+            -   lerna watch -- lerna run build
+
+        -   `./lerna-example`
+
+            ```shell
+            mkdir lerna-example
+            cd lerna-example
+            pnpx lerna init --dryRun
+            # --dryRun flag는 앞에 명령어를 실행했을때 예상되는 변경사항을 출력해주는 flag(실제 파일이 생성되지는 않음)
+            pnpx lerna init
+            corepack use pnpm@8.15.1
+            pnpm exec lerna create a -y
+            # lerna를 이용하여 package create
+            pnpm exec lerna create b -y
+            pnpm exec lerna run start --scope=a
+            # a package의 start script 실행
+            pnpm exec lerna run test
+            # lerna로 모든 package의 test 실행
+            pnpm exec lerna run test --no-private
+            # private의 값이 true가 아닌 package만 실행
+            pnpm exec lerna run test,build
+            # test와build script를 모두 진행시킴
+            pnpm exec lerna add-caching
+            # 변경사항이 없을때 cache를 사용하도록 설정
+            pnpm exec lerna run test --scope=a --verbose
+            # --verbose flag로 자세한 진행사항을 출력함
+            # a가 test하기 위해서 a를 build하여야하는데 a가 build되기 위해선 의존성인 b가 build되어야해서 b build -> a build -> a test 순으로 진행됨
+            pnpm exec lerna run test --scope=a --verbose
+            # 변경사항 없이 다시 진행하면 위와 같은 진행 순서를 가져야하는데 a, b 변경사항이 없으므로 a를 test하기 위해 a build -> a test 순으로 진행되나 cache를 가져옴
+            pnpm exec lerna run test --scope=a --verbose
+            # a만 변경하고 다시 진행하면 동일하게 a build -> a test 순으로 진행되나 a에 변경점이 생겼기 때문에 cache를 가져오지 않음
+            pnpm exec lerna run test --scope=a --verbose
+            # b를 변경하고 다시 진행하면 이제 b도 build가 필요하기 때문에 b build -> a build -> a test 순으로 진행됨
+            pnpm -w add nx
+            # nx console을 사용하기 위해 -w flag로 root project에 nx를 추가함
+            pnpm exec nx graph
+            # nx conole에서도 graph기능을 지원해주지만 위 명령어로 웹에서 볼 수 있게 실행됨
+            pnpm exec lerna version
+            # lerna project의 version을 올릴때 사용됨
+            pnpm exec lerna watch -- echo \$LERNA_PACKAGE_NAME \$LERNA_FILE_CHANGES
+            # lerna의 수정사항을 모니터링하여 package name과 바뀐 file을 출력함
+            pnpm exec lerna watch -- lerna run test --scope=\$LERNA_PACKAGE_NAME
+            # lerna의 수정사항을 모니터링하여 변경된 package를 test 수행함
+            ```
+
+-   nx
+
+-   rush
+
+-   turborepo
+
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Transfile과 Bundling Tool)
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
