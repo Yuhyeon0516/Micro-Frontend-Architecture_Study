@@ -675,6 +675,59 @@
 
 -   rush
 
+    -   rush는 공통 Git 리포지토리에서 많은 패키지를 빌드하고 게시하는 JavaScript 개발자의 삶을 더 쉽게 만들어주는 모노레포 관리 도구
+    -   마이크로소프트에서 관리하기 때문에 마이크로소프트의 많은 팀에서 사용하고 있음
+    -   다른 모노레포 도구와는 설정이나 동작 방식이 차이가 좀 있음
+    -   국내에는 레퍼런스가 많지 않음
+    -   많은 부분이 자동화 되어 있고, git 사용을 설정해야 캐싱 기능을 사용할 수 있음
+    -   기능과 장점
+
+        -   Ready for large repos
+            -   대규모 프로덕션 모노레포를 유지 관리하는 전문 엔지니어에 의해 구축되었고, 동료들에게 최고의 개발자 경험을 제공하는 것이 목표
+            -   모노레포를 관리하기 위해 병렬 빌드, 하위 집합 빌드, 증분 빌드 및 분산 빌드를 제공
+        -   Designed for large teams
+            -   리포지토리 정책을 통해 새로운 패키지 종속성을 승인하기 전에 검토할 수 있음
+            -   리포지토리 전체에 일관된 종속성 버전을 적용할 수 있음
+            -   프로젝트는 독립적인 버전 관리 전략을 사용하여 개별적으로 게시할 수 있음
+        -   Reliable NPM installations
+            -   rush 설치 모델은 pnpm 을 활용하여 팬텀 디펜던시를 제거함
+            -   lock 파일 탐색기 를 사용하여 버전 충돌을 시각화하고 문제를 해결할 수 있음
+        -   Easy to administer
+            -   rush를 사용하면 설치 및 빌드가 완전히 결정론적으로 이루어지도록 보장할 수 있음
+            -   rush 엔진 버전도 git 브랜치에 따라 자동으로 설치됨
+            -   사용자 지정 명령이나 옵션을 정의하면 엄격하게 검증되고 Rush 의 명령줄 도움말의 일부로 문서화 됨
+        -   Turnkey solution
+            -   rush 는 설치, 링크, 빌드, 변경 로그 생성, 게시 및 버전 범프가 가능한 통합 오케스트레이터 입니다. 이러한 기능은 광범위한 Rush Stack 도구 및 사례와 통합되도록 설계되었음
+        -   Open Model
+            -   rush는 무료 오픈 소스임
+
+    -   `./rush-example`
+
+        ```shell
+        mkdir rush-example
+        cd rush-example
+        pnpm i @microsoft/rush -g
+        rush init
+        mkdir projects
+        cd projects
+        mkdir my-utils
+        cd my-utils
+        pnpm init
+        rush update
+        # rush.json의 설정을 변경 시 update 명령어를 사용해야함
+        rush add -p typescript --dev
+        rush-pnpm exec tsc --init
+        rushx build
+        # 현재 들어와있는 폴더의 프로젝트의 script를 실행
+        cd ..
+        pnpx create-next-app@latest
+        rush update
+        cd my-app
+        rushx dev
+        rush build
+        # rush project 전체 build script 실행
+        ```
+
 -   turborepo
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Transfile과 Bundling Tool)
