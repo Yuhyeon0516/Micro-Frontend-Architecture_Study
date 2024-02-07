@@ -1,6 +1,6 @@
 # Micro-Frontend-Architecture_Study
 
--   MFA, 모노레포, 모듈페더레이션 등을 배워봅시다!
+-   MFA, Monorepo, ModuleFederation 등을 배워봅시다!
 
 ## Micro Frontends 개념 기초 학습
 
@@ -817,7 +817,6 @@
 
         ![동작원리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/d3b885a4-a08d-4487-b56c-839f3c66e805)
 
-
     -   @babel/core @babel/cli
 
         ![@babel](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/12a745de-5693-4319-9845-cbed3953ef3b)
@@ -825,7 +824,6 @@
     -   .babelrc.json (babel.config.json, .babelrc.js, babel.config.js)
 
         ![babelrc](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/def70549-774d-4d76-8d63-91b54bb7adaa)
-
 
     -   Plugin
 
@@ -861,6 +859,78 @@
         pnpm add @babel/preset-env -D
         # preset을 이용하여 변환이 필요한 문법만 변환함
         ```
+
+-   Rollup
+
+    -   작은 코드 조각들을 연결하는 모듈 시스템
+
+        ![작은 코드]()
+
+    -   cjs - commonjs (Node.js)
+
+        ![Nodejs]()
+
+    -   esm - es module (표준 스펙)
+
+        ![표준 스펙]()
+
+    -   Rollup이 하는일
+
+        -   표준 모듈 시스템 문법으로 작성된 여러개의 파일로 이루어진 코드를 한개 혹은 몇개로 묶어 주는 역할을 함
+        -   묶어주기 때문에 번들러 라고 부름
+        -   묶어주는 동작을 하면서 여러가지 일들(compile, minify 등)을 함께 수행하기 위해 여러가지 플러그인을 활용
+        -   보통 라이브러리 제작을 위한 번들러로 많이 사용
+
+    -   `./rollup-example`
+
+        ```shell
+        mkdir rollup-example
+        cd rollup-example
+        corepack enable
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm add rollup -D
+        pnpm build
+        ```
+
+-   Terser
+
+    -   Terser란?
+
+        -   자바스크립트 mangler 및 압축기 도구
+        -   mangler 는 망가뜨리는 사람, 고기를 써는 기계 라는 뜻. 코드를 실행이 가능한 수준으로만 망가뜨림
+        -   Terser는 자바스크립트 코드를 위한 업계 표준 minifier
+        -   변수 이름을 작게 만들고, 공백과 주석을 제거하며, 사용하지 않는 코드를 삭제
+        -   커맨드라인 명령어 혹은 Node.js API 로 사용이 가능
+        -   보통 직접 사용하지 않고, 많은 다른 도구들에서 사용됨
+
+            ex) webpack, angular, parcel 등
+
+        -   커맨드라인 : `terser [input files] [options]`
+        -   `./terser-example`
+            ```shell
+            mkdir terser-example
+            cd terser-example
+            pnpm init
+            corepack use pnpm@8.15.1
+            pnpm add terser -D
+            pnpm exec terser input.js
+            # 옵션없이 실행하면 아래와 같이 한줄로 변환만 해줌
+            # function abc(test){const hello="world";console.log(hello,test)}
+            pnpm exec terser input.js --mangle
+            # mangle 옵션을 사용하면 아래와 같이 망가뜨림
+            # function abc(o){const c="world";console.log(c,o)}
+            pnpm exec terser input.js --compress
+            # comress 옵션을 사용하면 아래와 같이 압축시킴
+            # function abc(test){console.log("world",test)}
+            pnpm exec terser input.js --compress --mangle
+            # compress와 mangle 옵션을 같이 사용하면 아래와 같이 망가뜨리고 압축시킴
+            # function abc(o){console.log("world",o)}
+            pnpm exec terser input.js --compress --mangle --output dist/output.js
+            # dist/output.js에 결과를 생성함
+            pnpm exec terser input.js --compress --mangle --output dist/output.js --source-map
+            # dist 폴더에 source map 파일이 같이 생겨서 사람이 읽기 쉽게 만들어줌
+            ```
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
 
