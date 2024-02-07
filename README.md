@@ -730,6 +730,55 @@
 
 -   turborepo
 
+    -   특징
+
+        -   Nest.JS를 만든 Vercel이라는 회사에서 인수한 빌드 시스템 도구
+        -   모노레포에서만 사용하는 것은 아닙니다. 모노레포의 경우에는 npm, yarn classic, yarn berry, pnpm 의 워크스페이스와 함께 사용 가능하지만, pnpm 을 권장
+        -   모노레포 환경에서도 쉽고 빠르게 개발할 수 있는 빌드 환경을 제공하는 것이 목표
+        -   프로젝트의 루트 혹은 각 워크스페이스에 turbo.json 이라는 파일을 이용해서 캐싱과 태스크 오케스트레이션을 설정
+
+    -   장점
+
+        -   Turborepo 는 사용자가 빌드한 내용을 기억하고 이미 계산한 내용은 건너뜁니다. (태스크 설정 만으로 기본값이 캐싱 한다는 뜻)
+        -   Turborepo 는 타임스탬프 가 아닌 파일 내용 을 보고 빌드해야 할 내용을 파악
+        -   쉬고 있는 CPU 를 낭비하지 않고, 모든 코어를 최대로 사용해서 병렬로 실행할 수 있음
+        -   원격 빌드 캐시를 팀원 및 CI/CD 와 공유하여 빌드 속도를 더욱 높일 수 있음
+        -   작업 간의 관계를 정의한 다음 Turborepo 가 빌드할 항목과 시기를 최적화할 수 있음
+
+    -   주요 기능
+
+        -   Running Tasks : `turbo run test`
+        -   Task Dependencies : `turbo run lint test build`
+        -   Code Generation : `turbo gen workspace`
+        -   Remote Caching : `turbo login`, `turbo link`
+
+    -   `./turborepo-example`
+        ```shell
+        mkdir turborepo-example
+        cd turborepo-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpx create-next-app@latest
+        cd ..
+        pnpm -w add turbo -D
+        mkdir packages
+        pnpm exec turbo gen workspace --name my-utils
+        # turbo의 Code Generation 기능을 이용하여 my-utils라는 workspace를 생성
+        pnpm --filter my-utils add typescript -D
+        pnpm --filter my-utils exec tsc --init
+        pnpm --filter my-utils build
+        pnpm i
+        pnpm --filter my-app dev
+        pnpm exec turbo build --filter=my-utils
+        # my-utils workspace만 build script 실행
+        pnpm exec turbo build
+        # 모든 workspace의 build script 실행
+        ```
+
+-   개인적으로는 nx나 turborepo가 제일 사용하기 편리하고 접근성이 좋은것 같다.
+
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 도구 학습하기(Transfile과 Bundling Tool)
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
