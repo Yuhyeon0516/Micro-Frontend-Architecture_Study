@@ -932,6 +932,34 @@
             # dist 폴더에 source map 파일이 같이 생겨서 사람이 읽기 쉽게 만들어줌
             ```
 
+-   esbuild
+    -   매우 빠른 Web용 번들러
+    -   Figma 의 CTO 에 의해 만들어졌음. 차세대 자바스크립트 번들러로 빠르게 인기를 얻고 있음
+    -   esbuild 번들러 프로젝트의 주요 목표는 빌드 도구 성능의 새로운 시대를 열고, 그 과정에서 사용하기 쉬운 최신 번들러를 만드는 것
+    -   Go 언어를 이용한 병렬 처리로 다른 번들러에 비해 월등한 속도를 자랑함
+    -   아직은 0.19 버전으로 1 버전이 출시되지 않았음. 주의해서 사용해야 하고, 계속 기능이 추가되고 있음
+    -   esbuild 는 친절하게 모든 개발 경험을 만족시켜주지는 않음. 작은 규모의 코드를 분할해서 패키지화 할때 쓰이거나, 다른 도구들에서 Babel 과 Terser 를 대신하여 사용함
+    -   주요 기능
+        -   Extreme speed without needing a cache
+        -   JavaScript, CSS, TypeScript, and JSX built-in
+        -   A straightforward API for CLI, JS, and Go
+        -   Bundles ESM and CommonJS modules
+        -   Bundles CSS including CSS modules
+        -   Tree shaking, minification, and source maps
+        -   Local server, watch mode, and plugins
+    -   `./esbuild-example`
+        ```shell
+        mkdir esbuild-example
+        cd esbuild-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        cd packages/my-utils
+        pnpm init
+        cd ...
+        pnpm --filter my-utils add esbuild typescript -D
+        pnpm --filter my-utils build
+        ```
+
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
 
 ## Micro Frontends 개념 심화 학습(분해와 통합을 위한 여러 기술 비교)
