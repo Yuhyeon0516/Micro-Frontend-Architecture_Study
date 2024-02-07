@@ -933,6 +933,7 @@
             ```
 
 -   esbuild
+
     -   매우 빠른 Web용 번들러
     -   Figma 의 CTO 에 의해 만들어졌음. 차세대 자바스크립트 번들러로 빠르게 인기를 얻고 있음
     -   esbuild 번들러 프로젝트의 주요 목표는 빌드 도구 성능의 새로운 시대를 열고, 그 과정에서 사용하기 쉬운 최신 번들러를 만드는 것
@@ -958,6 +959,39 @@
         cd ...
         pnpm --filter my-utils add esbuild typescript -D
         pnpm --filter my-utils build
+        ```
+
+-   SWC
+    -   Web을 위한 Rust 기반 플랫폼
+    -   SWC 는 차세대 고속 개발자 도구를 위한 확장 가능한 Rust 기반 플랫폼
+    -   Speedy Web Compiler 의 약자이며 속도를 무기로 많은 다른 도구와 회사에 퍼져나가고 있음
+    -   SWC 는 컴파일과 번들링 모두를 포함하고 있음. 현재는 컴파일에 주로 사용함. 번들링(spack)은 아직 개발 중. Terser 의 역할도 함
+    -   SWC 프로젝트의 목표는 “느린 웹 빌드 툴 전체를 러스트로 다시 구현하는 것” 이라고 함
+    -   컴파일의 경우 최신 자바스크립트 기능을 사용하여 자바스크립트/타입스크립트 파일을 가져와 모든 주요 브라우저에서 지원되는 유효한 코드를 출력
+    -   많은 곳에서 SWC 를 Babel 과 Terser 대신 사용해 속도에 개선을 가져오고 있으며, 그래서 인기가 올라가고 있음
+    -   `./swc-example`
+        ```shell
+        mkdir swc-example
+        cd swc-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm add @swc/cli @swc/core -D
+        pnpm exec swc src/arrow.js
+        '''결과물
+        export var test = function() {
+            var hello = "world";
+            var world = "unused";
+            console.log(hello, "test");
+        };
+        '''
+        pnpm exec swc src/arrow.js
+        '''minify 옵션을 true로 줬을때
+        export var test=function(){var hello="world";var world="unused";console.log(hello,"test")};
+        '''
+        pnpm exec swc src/arrow.js
+        ''' jsc 옵션으로 mangle과 compress를 진행했을때
+        export var test=function(){console.log("world","test")};
+        '''
         ```
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
