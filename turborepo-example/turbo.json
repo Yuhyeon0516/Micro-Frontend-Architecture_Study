@@ -1,0 +1,18 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "my-app#build": {
+            "dependsOn": ["^build"],
+            "outputs": [".next/**", "!.nest/cache/**"]
+        },
+        "my-utils#build": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
+        },
+        // 개발 환경에서는 cache를 false, persistent를 true로 하라고 tureborepo에서 제안하고있음
+        "my-app#dev": {
+            "cache": false,
+            "persistent": true
+        }
+    }
+}
