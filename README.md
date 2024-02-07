@@ -864,15 +864,15 @@
 
     -   작은 코드 조각들을 연결하는 모듈 시스템
 
-        ![작은 코드]()
+        ![작은 코드](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/1a2653e0-02de-47e4-a0d7-9dcc9f8d5aef)
 
     -   cjs - commonjs (Node.js)
 
-        ![Nodejs]()
+        ![Nodejs](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/b9f29013-131b-42f7-802c-962bbf249ca2)
 
     -   esm - es module (표준 스펙)
 
-        ![표준 스펙]()
+        ![표준 스펙](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/15bcdea3-bff3-4d33-a6d7-933b3ea75963)
 
     -   Rollup이 하는일
 
