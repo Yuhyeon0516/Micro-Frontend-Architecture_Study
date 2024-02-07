@@ -811,6 +811,67 @@
         -   Vite : 빠른 속도와 쉬운 사용법으로 인기를 얻어 현재 가장 많이 쓰이는 번들러
         -   esbuild : Go를 기반으로 빠른 속도와 트랜스파일까지 가능한 차세대 대표 번들러
 
+-   Babel
+
+    -   동작 원리
+
+        ![동작원리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/d3b885a4-a08d-4487-b56c-839f3c66e805)
+
+
+    -   @babel/core @babel/cli
+
+        ![@babel](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/12a745de-5693-4319-9845-cbed3953ef3b)
+
+    -   .babelrc.json (babel.config.json, .babelrc.js, babel.config.js)
+
+        ![babelrc](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/def70549-774d-4d76-8d63-91b54bb7adaa)
+
+
+    -   Plugin
+
+        ![plugin](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e309c227-fea4-4d8f-8a01-d068523be006)
+
+    -   Preset
+
+        ![preset](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/068d39f8-adfe-41e6-8480-dac86addc493)
+
+        -   대표적인 preset
+            -   @babel/preset-env : 최신 ES 스펙을 가지고 있으며, 세부 관리가 필요 없이 자동으로 필요한 문법만 처리하여 사이즈를 줄여줌
+            -   @babel/preset-react : 리액트 사용을 위해 jsx 등을 처리해주는 프리셋
+            -   @babel/preset-typescript 타입스크립트 문법을 변환해주는 프리셋. 변환시 타입 에러를 잡을 수 없는 단점이 있음(https://www.typescriptlang.org/docs/handbook/babel-with-typescript.html)
+
+    -   어떤 브라우저는 화살표 함수를 이해할 수 있음
+
+        ![화살표 함수](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/d042884b-f415-4cbb-8dbf-f5730084697c)
+
+    -   `./babel-example`
+
+        ```shell
+        mkdir babel-example
+        cd babel-example
+        corepack enable
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm add @babel/core @babel/cli -D
+        pnpm build
+        # 아무런 preset, plugin이 없는상태라 작성한 그대로 build되어 dist에 생성됨
+        pnpm add @babel/plugin-transform-arrow-functions -D
+        pnpm build
+        # 이번엔 plugin을 적용 시켰기 때문에 화살표 함수가 일반 함수로 변환됨
+        pnpm add @babel/preset-env -D
+        # preset을 이용하여 변환이 필요한 문법만 변환함
+        ```
+
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
 
 ## Micro Frontends 개념 심화 학습(분해와 통합을 위한 여러 기술 비교)
+
+## Micro Frontends 통합의 핵심 기술 Module Federation
+
+## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
+
+## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
+
+## MFA를 이용하여 커리어 플랫폼 서비스 만들기(통합 및 빌드)
+
+## MFA를 이용하여 커리어 플랫폼 서비스 만들기(운영)
