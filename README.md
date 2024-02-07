@@ -815,23 +815,25 @@
 
     -   동작 원리
 
-        ![동작원리]()
+        ![동작원리](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/d3b885a4-a08d-4487-b56c-839f3c66e805)
+
 
     -   @babel/core @babel/cli
 
-        ![@babel]()
+        ![@babel](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/12a745de-5693-4319-9845-cbed3953ef3b)
 
     -   .babelrc.json (babel.config.json, .babelrc.js, babel.config.js)
 
-        ![babelrc]()
+        ![babelrc](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/def70549-774d-4d76-8d63-91b54bb7adaa)
+
 
     -   Plugin
 
-        ![plugin]()
+        ![plugin](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e309c227-fea4-4d8f-8a01-d068523be006)
 
     -   Preset
 
-        ![preset]()
+        ![preset](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/068d39f8-adfe-41e6-8480-dac86addc493)
 
         -   대표적인 preset
             -   @babel/preset-env : 최신 ES 스펙을 가지고 있으며, 세부 관리가 필요 없이 자동으로 필요한 문법만 처리하여 사이즈를 줄여줌
@@ -840,7 +842,7 @@
 
     -   어떤 브라우저는 화살표 함수를 이해할 수 있음
 
-        ![화살표 함수]()
+        ![화살표 함수](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/d042884b-f415-4cbb-8dbf-f5730084697c)
 
     -   `./babel-example`
 
