@@ -962,6 +962,7 @@
         ```
 
 -   SWC
+
     -   Web을 위한 Rust 기반 플랫폼
     -   SWC 는 차세대 고속 개발자 도구를 위한 확장 가능한 Rust 기반 플랫폼
     -   Speedy Web Compiler 의 약자이며 속도를 무기로 많은 다른 도구와 회사에 퍼져나가고 있음
@@ -992,6 +993,65 @@
         ''' jsc 옵션으로 mangle과 compress를 진행했을때
         export var test=function(){console.log("world","test")};
         '''
+        ```
+
+-   Webpack
+
+    -   Webpack이란?
+
+        ![Webpack1]()
+
+        ![Webpack2]()
+
+    -   왜 Webpack을 많이 사용할까?
+        -   브라우저에서 자바스크립트를 실행시킬 때, 우리는 \<script> 태그를 이용해서 파일을 추가함. 프로젝트가 커지면 우리는 스크립트를 여러개로 분리해서 \<script> 태그로 적절한 순서로 추가하게됨. 파일이 계속 많아지면, 네트워크 병목의 원인 될 수 있음
+        -   위와 같이 안하면, 작은 파일을 그냥 합쳐서 엄청나게 큰 하나의 자바스크립트 파일을 만들어 사용하면됨. 이렇게 하면 유효범위와 크기, 가독성, 유지보수에 문제를 발생시킬 수 있음
+        -   IIFE(Immediately Invoked Function Expression, 즉시 실행 함수 표현식)
+            -   https://developer.mozilla.org/ko/docs/Glossary/IIFE
+            -   유효 범위 문제를 해결하기 위해 즉시 실행 함수들을 사용함. 유효 범위에 대한 걱정없이 파일을 합칠 수 있음
+            -   최적화가 어렵고, 코드가 실제로 사용되고 있는지 확인하기도 어려움
+            -   만약 lodash 에서 하나의 함수만 사용해도, 전체 라이브러리를 추가하고 모든 것을 뭉쳐야 함
+        -   NodeJS 가 채택한 CommonJS 는 모듈을 불러오고 사용할 수 있었음. 그렇지만 브라우저에서는 사용할 수 없었음
+        -   라이브 바인딩도 없음. 순환 참조의 문제가 있으며, 동기적인 모듈 해석과 로딩이 느림
+        -   브라우저에서 CommonJS의 실행을 가능하게 하는 Browserify와 RequireJS, SystemJS 같은 번들러와 툴들이 만들어졌음
+        -   ES Module 이 ECMAScript 표준에서 공식 기능이 되고 있음
+        -   그러나 브라우저 지원은 불완전하고, 번들링이 여전히 더 빠름
+        -   JavaScript 애플리케이션을 번들로 묶을 수 있는(ESM과 CommonJS 모두 지원) 도구이며, 이미지나 폰트, 스타일 시트 같은 다양한 애셋을 지원하도록 확장할 수 있음
+        -   Webpack은 성능과 로딩 시간을 중요하게 생각함. 프로젝트나 사용자에게 최고의 경험을 제공하기 위해 항상 비동기 청크 로딩이나 프리패칭 같은 새로운 기능을 추가하거나 개선하고 있음
+    -   Entry
+        -   엔트리 포인트는 webpack이 내부의 디펜던시 그래프 를 생성하기 위해 사용해야 하는 모듈
+        -   webpack 은 엔트리 포인트가 (직간접적으로) 의존하는 다른 모듈과 라이브러리를 찾아냄
+        -   기본값은 ./src/index.js 이지만, webpack 설정에서 “entry” 속성을 설정하여 다른 (혹은 여러 엔트리 포인트)를 지정할 수 있음
+    -   Output
+        -   output 속성은 생성된 번들을 내보낼 위치와 이 파일의 이름을 지정하는 방법을 webpack 에 알려주는 역할
+        -   기본 출력 파일의 경우에는 ./dist/main.js 로 생성되고, 기타 파일의 경우에는 ./dist 폴더 안에 생성되도록 설정
+    -   Loaders
+        -   webpack 은 기본적으로 JavaScript 와 JSON 파일만 이해함
+        -   로더를 사용하면 webpack이 다른 유형의 파일을 처리하거나, 그들을 유효한 모듈로 변환 하여 애플리케이션에서 사용하거나 디펜던시 그래프에 추가함
+        -   로더는 webpack 설정에 두 가지 속성을 가짐
+            -   변환이 필요한 파일(들)을 식별하는 test 속성
+            -   변환을 수행하는데 사용되는 로더를 가리키는 use 속성
+    -   Plugins
+        -   플러그인을 활용하여 번들을 최적화하거나, 애셋을 관리하고, 또 환경 변수 주입 등과 같은 광범위한 작업을 수행 할 수 있음
+        -   플러그인을 사용하려면 require() 를 통해 플러그인을 요청하고 “plugins" 배열에 추가해야 함
+        -   대부분의 플러그인은 옵션을 통해 사용자가 지정할 수 있음
+        -   다른 목적으로 플러그인을 여러번 사용하도록 설정할 수 있으므로 일반적으로 new 연산자로 호출하여 플러그인의 인스턴스를 만들어야 함
+    -   Mode
+        -   mode 파라미터를 development, production 또는 none 으로 설정하면 webpack 에 내장된 환경별 최적화를 활성화 할 수 있음
+        -   기본값은 production임
+    -   `./webpack-example`
+        ```shell
+        mkdir webpack-example
+        cd webpack-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm add webpack webpack-cli -D
+        pnpm exec webpack
+        pnpm add lodash
+        pnpm exec webpack --config webpack.config.js
+        pnpm add babel-loader @babel/core @babel/preset-env -D
+        pnpm add html-webpack-plugin -D
+        pnpm add webpack-dev-server -D
         ```
 
 ### Monorepo로 구성된 Frontend 프로젝트를 위한 적합 도구 최종 선택
