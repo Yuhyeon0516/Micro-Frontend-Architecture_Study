@@ -999,9 +999,9 @@
 
     -   Webpack이란?
 
-        ![Webpack1]()
+        ![Webpack1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/de3619e0-dc17-4660-b7ed-7a6d2cee780a)
 
-        ![Webpack2]()
+        ![Webpack2](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/973d41cc-1374-4e7b-83c9-34053fe868b3)
 
     -   왜 Webpack을 많이 사용할까?
         -   브라우저에서 자바스크립트를 실행시킬 때, 우리는 \<script> 태그를 이용해서 파일을 추가함. 프로젝트가 커지면 우리는 스크립트를 여러개로 분리해서 \<script> 태그로 적절한 순서로 추가하게됨. 파일이 계속 많아지면, 네트워크 병목의 원인 될 수 있음
