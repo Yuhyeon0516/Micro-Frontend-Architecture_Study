@@ -1195,6 +1195,60 @@
 
 ### 마이크로 프론트엔드를 구현하는 기술 2 : 서버에서 proxy를 이용한 여러 페이지 통합
 
+-   Nginx와 proxy를 이용한 페이지 분리 및 통합 예제
+
+    -   Nginx와 Frontend Proxy Server
+
+        -   Nginx (Reverse Proxy Server) 는 사용자의 요청을 가장 먼저 받고 내부의 서버로부터 리소스를 대신 요청하고 받아 제공하는 중개자 역할을 하며, 여러가지 도움을 줌
+            -   로드 밸런싱을 수행해서 성능, 확장성 및 신뢰성을 향상시킬 수 있음
+            -   캐싱을 이용해서 동일한 응답을 뒤에 있는 서버에 다시 요청하지 않을 수 있음
+            -   외부 사용자로부터 내부의 서버를 숨겨 보안에 도움을 줌
+            -   SSL 을 사용해서 암호화가 가능함
+
+    -   예제 시나리오 정리
+
+        -   Team Home 이 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3001`)
+            -   Pages: `/index.html`
+        -   Team Jobs 가 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3002`)
+            -   Pages: `/jobs/index.html`
+        -   Team Network 가 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3003`)
+            -   Pages: `/network/index.html`
+        -   Nginx Reverse Proxy Server(`localhost:3000`)
+
+    -   `./micro-frontends-with-proxy`
+
+        ```shell
+        mkdir micro-frontends-with-proxy
+        cd micro-frontends-with-proxy
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm add turbo -D
+        cd apps/nginx-app
+        pnpm init
+        cd ...
+        pnpm --filter nginx-app build
+        mkdir teams
+        cd teams
+        pnpm create vite@latest team-home --template vanilla-ts
+        pnpm create vite@latest team-jobs --template vanilla-ts
+        pnpm create vite@latest team-network --template vanilla-ts
+        cd ..
+        pnpm install
+        pnpm exec turbo dev
+        ```
+
+-   특징 및 장단점
+
+    -   Nginx 를 이용한 Reverse Proxy Server 는 매우 일반적인 형태이며 여기에 Location 을 통한 서버 분리만을 추가하는 형태라서 도입이 쉽다.
+
+    -   각 팀이 다른 도메인을 사용하는 것은 여러가지 측면에서 올바르지 않을 수 있음. 서브 도메인을 활용해서 각 팀이 분리될 수 있지만, 완전히 같은 서비스라는 인식을 주지 않음.
+    -   외부에서는 같은 리소스로 인식하기 때문에 cors 와 같은 문제도 해결됨
+    -   Location 의 path 로 구별되는 서버라는 것을 인지하고 SPA 를 사용하여 각자 구축할 때 주의해야함 보통 Linked SPA 라고 부릅니다. SPA 사이에서 넘나들때는 a 태그를 이용한 하드 네비게이션을 사용해야함
+    -   내부망의 엔드포인트만 공유하고 인프라를 각자의 팀에서 개발 관리할 수 있음
+    -   팀이 같은 리소스를 각자 중복으로 사용하게되어 스타일이나 중복 로직을 별도 패키지로 구축하고 함께 사용하는 경우에도 각자 빌드를 통해 따로 유저에게 제공이 됨
+    -   각 팀은 각자 앱을 개발하게되며 이로 인해 각 팀의 영역으로 이동시에는 스타일이나 같은 로직을 중복으로 로드해야 할 수 있음. 이것은 머신의 리소스 측면에서는 단점이지만, 완벽하게 서비스는 분리되어 있으므로 장애의 전파는 확실히 차단할 수 있음
+    -   팀 간의 이동시에는 하드 링크로 인해 새로 실행하면서 깜박임이 있을 수 있고, 이로 인해 유저 경험이 다소 해칠 수 있으나, 확실한 분리로 인한 장점과 팀 간의 전환이 빈번하지 않은 경우 선택할 수 있는 가장 좋은 옵션임
+
 ### 마이크로 프론트엔드를 구현하는 기술 3 : 서버에서 SSI를 이용한 프레그먼트 통합
 
 ### 마이크로 프론트엔드를 구현하는 기술 4 : 클라이언트에서 Web Components를 이용한 프레그먼트 통합
