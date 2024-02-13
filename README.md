@@ -1351,6 +1351,43 @@
 
 ### 마이크로 프론트엔드를 구현하는 기술 5 : 클라이언트에서 iframe을 이용한 통합
 
+-   \<iframe>이란?
+
+    -   The Inline Frame element 란 의미
+    -   \<iframe> HTML 요소는 중첩된 브라우징 컨텍스트를 나타내며, 현재 페이지에 다른 HTML 페이지를 삽입함
+
+-   예제 시나리오 정리
+
+    -   Team Home 이 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3001`)
+        -   Pages: `index.html`
+    -   Team Jobs 가 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3002`)
+        -   Fragments: `/jobs/fragments/recommendation/index.html`
+
+-   `./micro-frontends-with-iframe`
+
+    ```shell
+    mkdir micro-frontends-with-iframe
+    cd micro-frontends-with-iframe
+    pnpm init
+    corepack use pnpm@8.15.1
+    pnpm add turbo -D
+    mkdir teams
+    cd teams
+    pnpm create vite@latest team-home --template vanilla-ts
+    pnpm create vite@latest team-jobs --template vanilla-ts
+    cd ..
+    pnpm i
+    pnpm exec turbo dev
+    ```
+
+-   특징 및 장단점
+    -   iframe 은 오래전부터 사용이 가능했고, 그래서 구형 브라우저에서도 사용이 가능함
+    -   그냥 서로 다른 도큐먼트이며 별개의 브라우저 컨텍스트를 생성하기 때문에 강력하게 서로 격리됨. 이로 인해 서로 통신을 해야 한다면 추가적인 작업이 필요함
+    -   새로운 컨텍스트를 만들어야 하기 때문에 추가적인 메모리 및 CPU 가 필요함
+    -   검색 엔진은 iframe 을 개별 페이지로 색인하기 때문에 본 페이지의 내용에서 제외함
+    -   단점이 많아 아쉽지만, 오래전부터 결합을 위해 선택하게 되는 선택지 중 가장 대표적인 케이스
+    -   성능이나 접근성, SEO 가 중요한 고객 지향적인 서비스를 구축하는 경우 iframe 을 권장하지는 않음
+
 ## Micro Frontends 통합의 핵심 기술 Module Federation
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
