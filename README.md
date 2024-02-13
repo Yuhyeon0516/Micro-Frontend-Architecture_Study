@@ -1301,6 +1301,54 @@
 
 ### 마이크로 프론트엔드를 구현하는 기술 4 : 클라이언트에서 Web Components를 이용한 프레그먼트 통합
 
+-   Web Components란?
+
+    -   웹 컴포넌트 는 그 기능을 나머지 코드로부터 캡슐화하여 재사용 가능한 커스텀 엘리먼트를 생성하고 웹 앱에서 활용할 수 있도록 해주는 다양한 기술들의 모음
+        -   사용자 정의 요소 (Custom Element): 내가 지은 이름의 엘리먼트
+        -   캡슐화 (Shadow DOM): 웹 컴포넌트 바깥의 도큐먼트와 분리된 스타일과 스크립트
+        -   HTML 템플릿: 일반적으로 랜더되지 않고 웹 컴포넌트 내에서 랜더하며 재사용할 수 있는 \<template>, \<slot> 엘리먼트
+
+-   예제 시나리오 정리
+
+    -   Team Home 이 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3001`)
+        -   Web Component: `/bundle.js`
+    -   Team Jobs 가 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3002`)
+        -   Web Component: `/bundle.js`
+    -   Web Service 를 제공하는 Shell App(`localhost:3000`)
+        -   Page: `index.html`
+
+-   `./micro-frontends-with-wc`
+
+    ```shell
+    mkdir micro-frontends-with-wc
+    cd micro-frontends-with-wc
+    pnpm init
+    corepack use pnpm@8.15.1
+    pnpm add turbo -D
+    mkdir apps apps/shell
+    cd apps/shell
+    pnpm init
+    cd ...
+    pnpm --filter shell add serve
+    mkdir teams teams/team-home teams/team-jobs
+    cd teams/team-home
+    pnpm init
+    cd ../team-jobs
+    pnpm init
+    cd ...
+    pnpm --filter team-home add serve
+    pnpm --filter team-jobs add serve
+    pnpm exec turbo dev
+    ```
+
+-   특징 및 장단점
+    -   강력한 장점은 웹 표준이라는 것. 오랜 시간 웹 컴포넌트의 스펙이 준비되었고, 다른 어떤 컴포넌트 기반 라이브러리보다도 미래 지향적임
+    -   Shadow DOM 을 이용해서 브라우저 레벨에서 격리가 가능함
+    -   여러가지 생명 주기 메서드를 오버라이드 해서 구현이 가능함. 이를 이용해서 특정 기술로 만든 프레그먼트를 래핑할 수 있음
+    -   클라이언트에서 JS 를 이용할 수 있어야함.
+    -   서버사이드에서 바로 랜더가 가능하지 않음(우회 방식으로 템플릿을 문자열로 랜더해서 처리할 수 있음)
+    -   Shadow DOM 을 지원하지 않는 브라우저가 있음
+
 ### 마이크로 프론트엔드를 구현하는 기술 5 : 클라이언트에서 iframe을 이용한 통합
 
 ## Micro Frontends 통합의 핵심 기술 Module Federation
