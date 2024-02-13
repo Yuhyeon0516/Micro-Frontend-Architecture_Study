@@ -1251,6 +1251,54 @@
 
 ### 마이크로 프론트엔드를 구현하는 기술 3 : 서버에서 SSI를 이용한 프레그먼트 통합
 
+-   SSI(Server-Side Includes)란?
+
+    -   #include 지시문을 사용하여 하나 이상의 파일 내용을 웹 서버의 웹 페이지에 포함시키는 방법
+    -   Nginx 뿐만 아니라 다른 웹서버 에서도 지원하는 기능
+    -   웹 서버가 HTML 문서 내에서 지시문을 만나면, 지시문을 해석하여 변환하고 최종 결과물을 만들어서 요청자에게 제공
+
+-   예제 시나리오 정리
+
+    -   Team Home 이 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3001`)
+        -   Pages: `/index.html`
+    -   Team Jobs 이 운영하는 정적 파일을 제공하는 웹 서버(`localhost:3002`)
+        -   Fragments: `/jobs/fragments/recommendation/index.html`
+    -   Nginx Reverse Proxy Server(`localhost:3000`)
+
+-   `./micro-frontends-with-ssi`
+
+    ```shell
+    mkdir micro-frontends-with-ssi
+    cd micro-frontends-with-ssi
+    pnpm init
+    corepack use pnpm@8.15.1
+    pnpm add turbo
+    cd apps/nginx-ssi-app
+    pnpm init
+    pnpm --filter nginx-ssi-app build
+    cd ...
+    mkdir teams teams/team-home teams/team-jobs
+    cd teams/team-home
+    pnpm init
+    cd ../team-jobs
+    pnpm init
+    cd ...
+    pnpm --filter team-home add serve
+    pnpm --filter team-jobs add serve
+    pnpm exec turbo dev
+    ```
+
+-   특징 및 장단점
+    -   SSI 자체는 오래된 기술이며 검증된 기술로 안정성이 높음
+    -   서버에서 마크업을 만들어서 제공하기 때문에 검색엔진에서 유리한 경우가 있음
+    -   내부망에서의 레이턴시가 낮기 때문에 클라이언트에서 조합하는 것보다 빠름. 클라이언트에서 Ajax 를 통해 다시 서버로 요청하면서 발생하는 추가적인 시간이 없음. 서버에서 다시 서버로 요청한 템플릿을 받아 조합하기 때문에 이때의 네트워크 레이턴시가 적고 리소스를 서비스 제공자 측에 서 관리할 수 있음
+    -   템플릿이 동적으로 생성된 것이 아니라, 정적이면 특히 느릴만한 부분이 없으나, 동적으로 템플릿을 생성하는 경우(디비로부터 데이터 조회 후 생성)에는 그만큼의 대기 후에 템플릿이 조합된 후 응답이 내려가서 유저 입장에서는 아예 도큐먼트를 조금도 보지 못하는 시간이 조금 길어질 수 있음
+    -   규모가 커지면서 첫 로딩에 문제가 발생할 수 있습니다. 병렬로 템플릿을 합치지만 결국에는 가장 오래걸리는 시간을 따라가게 됨
+    -   중첩이 심해지면 좀더 시간이 오래 걸림
+    -   일반적으로 유저 인터렉션이 활발한 형태의 앱에서는 잘 맞지 않음. 서버측 통합과 클라이언트측 통합을 적절히 섞어 사용하면 좋음
+    -   조합에 실패하는 경우에 대한 계획이 필요함(Fallback 이나 Timeout 설정)
+    -   Nginx 의 SSI 기술뿐만 아니라 서버 사이드 랜더링을 하면서 조합을 하는 방법도 있음
+
 ### 마이크로 프론트엔드를 구현하는 기술 4 : 클라이언트에서 Web Components를 이용한 프레그먼트 통합
 
 ### 마이크로 프론트엔드를 구현하는 기술 5 : 클라이언트에서 iframe을 이용한 통합
