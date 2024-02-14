@@ -1431,7 +1431,6 @@
 
     ![2](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e8e9a69e-9955-4b78-95ad-d5c1f068a6ae)
 
-
     -   Remote 애플리케이션은 자체적인 빌드 과정을 통해 remoteEntry.js 와 같은 원격 엔트리 파일을 생성하고, 이 파일은 원격 모듈의 메타데이터와 주소를 포함함.
     -   Host 애플리케이션은 remoteEntry.js 를 참조하여 필요한 모듈을 요청하고, 이 요청은 Webpack의 런타임 코드에 의해 처리되며, 필요한 경우 네트워크를 통해 해당 모듈을 로드함.
 
@@ -1468,6 +1467,25 @@
         -   Vite/Rollup 과 Webpack 이 동일한 청크를 생성한다는 보장이 없어 shared 에 문제가 발생할 수있으므로, React 프로젝트에서 Vite 와 Webpack을 혼합하는 것은 권장하지 않음
 
 ### Module Federation 예제
+
+-   나의 React 앱에서 다른 서버의 React 컴포넌트를 런타임에 가져와서 사용하기
+
+    ```shell
+    mkdir module-federation-basic-example
+    cd module-federation-basic-example
+    pnpm init
+    corepack use pnpm@8.15.1
+    mkdir apps
+    cd apps
+    pnpm create mf-app # (main-app, 3000 port)
+    pnpm create mf-app # (component-app, 3001 port)
+    cd ..
+    pnpm i
+    pnpm --filter component-app start:live
+    pnpm dev
+    pnpm build
+    pnpm serve
+    ```
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
