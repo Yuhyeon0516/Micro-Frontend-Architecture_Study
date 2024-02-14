@@ -1468,33 +1468,49 @@
 
 ### Module Federation 예제
 
--   나의 React 앱에서 다른 서버의 React 컴포넌트를 런타임에 가져와서 사용하기
+-   `./module-federation-basic-example`
 
-    ```shell
-    mkdir module-federation-basic-example
-    cd module-federation-basic-example
-    pnpm init
-    corepack use pnpm@8.15.1
-    mkdir apps
-    cd apps
-    pnpm create mf-app # (main-app, 3000 port)
-    pnpm create mf-app # (component-app, 3001 port)
-    cd ..
-    pnpm i
-    pnpm --filter component-app start:live
-    pnpm dev
-    pnpm build
-    pnpm serve
-    ```
+    -   나의 React 앱에서 다른 서버의 React 컴포넌트를 런타임에 가져와서 사용하기
 
--   여러 마이크로 앱에서 런타임에 공통적으로 사용하는 라이브러리를 한번만 로드하기
+        ```shell
+        mkdir module-federation-basic-example
+        cd module-federation-basic-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpm create mf-app # (main-app, 3000 port)
+        pnpm create mf-app # (component-app, 3001 port)
+        cd ..
+        pnpm i
+        pnpm --filter component-app start:live
+        pnpm dev
+        pnpm build
+        pnpm serve
+        ```
 
-    ```shell
-    pnpm --filter main-app add lodash@4.17.21
-    pnpm --filter component-app add lodash@4.17.21
-    # 두개의 앱의 버젼이 같으면 lodash는 한번 로딩됨
-    # 만약 버젼이 다르다면 각자 따로 로딩됨
-    ```
+    -   여러 마이크로 앱에서 런타임에 공통적으로 사용하는 라이브러리를 한번만 로드하기
+
+        ```shell
+        pnpm --filter main-app add lodash@4.17.21
+        pnpm --filter component-app add lodash@4.17.21
+        # 두개의 앱의 버젼이 같으면 lodash는 한번 로딩됨
+        # 만약 버젼이 다르다면 각자 따로 로딩됨
+        ```
+
+    -   두 앱에서 Context 를 공유해서 사용하기
+
+        ```shell
+        mkdir packages
+        cd packages
+        pnpm create vite shared-library --template react-swc-ts
+        cd ..
+        pnpm i
+        pnpm --filter shared-library add vite-plugin-dts -D
+        pnpm --filter shared-library build
+        pnpm i
+        pnpm dev
+        ```
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
