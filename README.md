@@ -1547,6 +1547,25 @@
         pnpm --filter main-app start:live
         ```
 
+-   다른 서버의 리액트 앱을 가져와서 엘리먼트에 랜더하기(격리)
+
+    -   `./module-federation-isolated-example`
+
+        ```shell
+        mkdir module-federation-isolated-example
+        cd module-federation-isolated-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpm create mf-app # (main-app, port 3000)
+        pnpm create mf-app # (isolated-app, port 3001)
+        cd ..
+        pnpm i
+        pnpm --filter isolated-app start:live
+        pnpm --filter main-app start:live
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
