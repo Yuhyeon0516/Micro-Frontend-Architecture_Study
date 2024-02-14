@@ -1522,6 +1522,31 @@
         # Error가 발생하였기 때문에 ErrorBoundary로 Error에 대한 대응을 할 수 있음
         ```
 
+-   다른 서버의 React 컴포넌트에 TypeScript 의 타입 설정하기
+
+    -   `./module-federation-ts-example`
+
+        ```shell
+        mkdir module-federation-ts-example
+        cd module-federation-ts-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpm create mf-app # (main-app, port 3000)
+        pnpm create mf-app # (component-app, port 3001)
+        cd ..
+        pnpm i
+        pnpm --filter component-app start:live
+        pnpm --filter main-app add react-error-boundary
+        pnpm --filter main-app start:live
+        pnpm --filter component-app add @module-federation/typescript
+        pnpm --filter component-app build
+        pnpm --filter component-app build:start
+        pnpm --filter main-app add @module-federation/typescript
+        pnpm --filter main-app start:live
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
