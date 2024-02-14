@@ -1512,6 +1512,16 @@
         pnpm dev
         ```
 
+    -   Lazy, Suspense, ErrorBoundary 를 통한 통합
+
+        ```shell
+        pnpm --filter main-app add react-error-boundary
+        pnpm --filter main-app build
+        pnpm --filter main-app build:start
+        # component-app이 실행중이지 않기 때문에 Error가 발샘함
+        # Error가 발생하였기 때문에 ErrorBoundary로 Error에 대한 대응을 할 수 있음
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
