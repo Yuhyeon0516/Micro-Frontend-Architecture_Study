@@ -1427,9 +1427,10 @@
 
 -   Module Federation 동작 원리의 이해
 
-    ![1]()
+    ![1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/1c8ff3c8-8170-47cc-ba89-f8cea0b48046)
 
-    ![2]()
+    ![2](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e8e9a69e-9955-4b78-95ad-d5c1f068a6ae)
+
 
     -   Remote 애플리케이션은 자체적인 빌드 과정을 통해 remoteEntry.js 와 같은 원격 엔트리 파일을 생성하고, 이 파일은 원격 모듈의 메타데이터와 주소를 포함함.
     -   Host 애플리케이션은 remoteEntry.js 를 참조하여 필요한 모듈을 요청하고, 이 요청은 Webpack의 런타임 코드에 의해 처리되며, 필요한 경우 네트워크를 통해 해당 모듈을 로드함.
@@ -1458,7 +1459,7 @@
 
     -   vite.config.ts 설정
 
-        ![3]()
+        ![3](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/419c9343-6170-4b0e-a5df-48bbdcc17dd0)
 
     -   @originjs/vite-plugin-federation 예제
         -   https://github.com/originjs/vite-plugin-federation?tab=readme-ov-file#example-projects
