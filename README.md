@@ -1586,6 +1586,27 @@
         pnpm dev
         ```
 
+-   전역에서 Redux 를 사용할 때, 다른 서버의 React 컴포넌트를 가져오면서 리듀서를 추가하기
+
+    -   `./module-federation-redux-example`
+
+        ```shell
+        mkdir module-federation-redux-example
+        cd module-federation-redux-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpm create mf-app # (main-app, port 3000)
+        pnpm create mf-app # (remote-app, port 3001)
+        cd ..
+        pnpm i
+        pnpm --filter main-app add @reduxjs/toolkit react-redux
+        pnpm --filter remote-app add @reduxjs/toolkit react-redux
+        pnpm --filter main-app add @babel/runtime
+        pnpm dev
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
