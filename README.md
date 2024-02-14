@@ -1487,6 +1487,15 @@
     pnpm serve
     ```
 
+-   여러 마이크로 앱에서 런타임에 공통적으로 사용하는 라이브러리를 한번만 로드하기
+
+    ```shell
+    pnpm --filter main-app add lodash@4.17.21
+    pnpm --filter component-app add lodash@4.17.21
+    # 두개의 앱의 버젼이 같으면 lodash는 한번 로딩됨
+    # 만약 버젼이 다르다면 각자 따로 로딩됨
+    ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
