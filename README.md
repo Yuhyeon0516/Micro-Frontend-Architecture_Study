@@ -1468,9 +1468,9 @@
 
 ### Module Federation 예제
 
--   `./module-federation-basic-example`
+-   나의 React 앱에서 다른 서버의 React 컴포넌트를 런타임에 가져와서 사용하기
 
-    -   나의 React 앱에서 다른 서버의 React 컴포넌트를 런타임에 가져와서 사용하기
+    -   `./module-federation-basic-example`
 
         ```shell
         mkdir module-federation-basic-example
@@ -1564,6 +1564,26 @@
         pnpm i
         pnpm --filter isolated-app start:live
         pnpm --filter main-app start:live
+        ```
+
+-   여러 페이지가 있는 두개의 앱을 하나로 통합하기 (feat. react-router-dom)
+
+    -   `./module-federation-router-example`
+
+        ```shell
+        mkdir module-federation-router-example
+        cd module-federation-router-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        mkdir apps
+        cd apps
+        pnpm create mf-app # (app-shell, port 3000)
+        pnpm create mf-app # (app-jobs, port 3001)
+        pnpm create mf-app # (app-network, port 3002)
+        pnpm --filter app-shell add react-router-dom
+        pnpm --filter app-jobs add react-router-dom
+        pnpm --filter app-network add react-router-dom
+        pnpm dev
         ```
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
