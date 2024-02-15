@@ -1607,6 +1607,25 @@
         pnpm dev
         ```
 
+-   나의 React 앱에서 다른 서버의 React 컴포넌트를 가져와서 동적으로 사용하기
+
+    -   `./module-federation-dynamic-example`
+
+        ```shell
+        mkdir module-federation-dynamic-example
+        cd module-federation-dynamic-example
+        pnpm init
+        corepack use pnpm@8.15.1
+        pnpm create mf-app # (main-app, 3000)
+        pnpm create mf-app # (component-app1, 3001)
+        pnpm create mf-app # (component-app2, 3002)
+        cd ..
+        pnpm i
+        pnpm --filter main-app add @module-federation/utilities
+        pnpm --filter main-app add @babel/runtime
+        pnpm dev
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
