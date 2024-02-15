@@ -1,8 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
 import DynamicButton from "./components/DynamicButton";
+
+// @ts-ignore
+const Button = React.lazy(() => import("dynamic/Button"));
 
 const App = () => {
     const [button, setButton] = React.useState<{
@@ -41,6 +44,12 @@ const App = () => {
             </button>
             <div>
                 <DynamicButton button={button} />
+            </div>
+
+            <div>
+                <Suspense fallback="Loading Button">
+                    <Button />
+                </Suspense>
             </div>
         </div>
     );
