@@ -1626,6 +1626,21 @@
         pnpm dev
         ```
 
+-   다른 서버의 React 컴포넌트를 가져올 때, 다른 서버를 동적으로 지정하기
+
+    -   `./module-federation-dynamic-example` 연장
+
+        ```shell
+        cd apps
+        mkdir api-server
+        cd api-server
+        pnpm init
+        cd ...
+        pnpm --filter api-server add serve
+        pnpm --filter api-server dev
+        pnpm dev
+        ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(설계)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
