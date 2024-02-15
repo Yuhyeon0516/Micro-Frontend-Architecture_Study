@@ -1787,7 +1787,7 @@
 
     -   마이크로 앱들의 런타임 통합
 
-        ![1]()
+        ![1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e478e3e0-97ab-4bc7-9f71-d121246e97f2)
 
         -   기본적으로 가장 대표적인 프론트엔드 기술인 리액트와 타입스크립트를 활용
         -   Vite 의 Module Federation 플러그인은 Webpack 에 비해 프로덕션에서 아직 안정적이지 않으므로, Webpack Module Federation 을 활용
@@ -1797,7 +1797,7 @@
 
     -   패키지 인터페이스를 통한 빌드 타임 통합
 
-        ![2]()
+        ![2](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/3f48ffc7-5dbe-437e-a2b7-09f6cf78daa3)
 
         -   공통으로 사용할만한 로직이나 컴포넌트는 별도의 패키지로 분리하고 package.json 에 적혀있는 정보를 기반으로 사용
         -   빌드 타임에 각 마이크로 앱과 shell 에 포함이 됨
