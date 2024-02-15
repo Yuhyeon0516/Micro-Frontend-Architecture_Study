@@ -1879,6 +1879,25 @@
 
 ### 공통 모듈 개발하기 2 (App Shell 만들기)
 
+-   App Shell의 역할 및 패키지 생성 및 설정
+
+    ```shell
+    cd packages
+    pnpm create vite shell-router --template react-swc-ts
+    cd ..
+    pnpm i
+    # package.json 수정
+    pnpm --filter @career-up/shell-router add vite-plugin-dts -D
+    # vite.config.ts 수정
+    # index.ts에 test function을 export
+    pnpm --filter @career-up/shell-router build
+    # apps/shell/package.json의 dependencies에 "@career-up/shell-router"를 추가
+    pnpm i
+    # apps/shell/webpack.config.js의 shared에서 @career-up/shell-router의 signleton 옵션을 true로 변경
+    pnpm --filter @career-up/shell start:live
+    # 위에 작성해둔 shell router의 test function이 잘 호출되고 실행되는지 확인
+    ```
+
 ### 마이크로 앱 만들기 1 (포스팅)
 
 ### 마이크로 앱 만들기 2 (교육)
