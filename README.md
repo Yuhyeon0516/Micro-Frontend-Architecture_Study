@@ -1,6 +1,8 @@
 # Micro-Frontend-Architecture_Study
 
 -   MFA, Monorepo, ModuleFederation 등을 배워봅시다!
+-   저는 Fast campus의 강의를 듣고 공부하였습니다~
+    https://fastcampus.co.kr/dev_online_mfa
 
 ## Micro Frontends 개념 기초 학습
 
@@ -1833,6 +1835,74 @@
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
 
+### 공통 모듈 개발하기 1 (UI 라이브러리 패키지 만들기)
+
+-   UI 라이브러리 패키지 생성 및 설정
+
+    ```shell
+    mkdir packages
+    cd packages
+    pnpm create vite ui-kit --template react-swc-ts
+    cd ..
+    pnpm i
+    # career-up/packages/ui-kit/src/components/Button.tsx 생성
+    pnpm --filter @career-up/ui-kit add vite-plugin-dts -D
+    # career-up/packages/ui-kit/vite.config.ts 설정
+    # career-up/packages/ui-kit/package.json 설정
+    pnpm --filter @career-up/ui-kit build
+    # career-up/apps/shell/package.json에 ui-kit을 dependencies에 추가
+    pnpm i
+    pnpm --filter @career-up/shell start:live
+    # 위 명령어 진행 시 workspace:* 경로를 인식할 수 없다고 에러 발생함
+    # career-up/apps/shell/webpack.config.js에 ui-kit의 shared signleton을 true로 설정
+    # 기존 shell에 있던 index.css의 내용을 ui-kit의 global.css로 옮김
+    # 그리고 index.ts에서 import 구문을 이용하여 global.css를 호출함
+    # 이후 pnpm --filter @career-up/ui-kit build 를 진행하여 dist폴더에 style.css라는 파일이 생성됨
+    # 그러나 이 css를 다른곳에서 호출해야하기 때문에 이름을 index.css로 변경 시킬거고 이에 대한 설정을 vite.config.ts에서 assetFileNames로 설정해줌
+    pnpm --filter @career-up/ui-kit build
+    # 이후 packages.json에서 exports 옵션에 ./index.css를 추가함
+    # 그리고 app shell에서 import "@career-up/ui-kit/index.css";로 호출하면 사용이 가능해짐
+    ```
+
+-   컴포넌트 제작 및 빌드
+
+    ```shell
+    pnpm --filter @career-up/ui-kit add react-icons
+    # 내가 사용할 icon을 components/icons 폴더에 생성(Briefcase, Home, LaptopCode, UserFriends)
+    # 위에서 생성한 아이콘을 components/Icons.tsx에서 전부 export 될수 있게 생성
+    # index.ts에서 Icon을 export해주면 이제 shell에서 호출이 가능해짐
+    pnpm --filter @career-up/ui-kit build
+    # app shell에 App.tsx에서 Icon을 @career-up/ui-kit에서 가져와서 사용할 수 있음
+    # 추가로 이번 프로젝트에 사용할 Button component를 만들고 코드를 수정함
+    pnpm --filter @career-up/ui-kit build
+    ```
+
+### 공통 모듈 개발하기 2 (App Shell 만들기)
+
+### 마이크로 앱 만들기 1 (포스팅)
+
+### 마이크로 앱 만들기 2 (교육)
+
+### 마이크로 앱 만들기 3 (인맥)
+
+### 마이크로 앱 만들기 4 (채용)
+
+### 프레그먼트 만들기
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(통합 및 빌드)
 
+### Module Federation으로 제작된 마이크로 앱 빌드 및 배포
+
+### 개발 후 배포 과정 시뮬레이션
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(운영)
+
+### 성능 최적화 고려하여 운영하기
+
+### 보안 이슈
+
+### 팀 운영하기
+
+### 배포 전략 설정
+
+### 장애 대응
