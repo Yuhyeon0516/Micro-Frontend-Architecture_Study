@@ -1917,6 +1917,13 @@
 
 -   공통 레이아웃 설정 및 스타일 충돌 해결을 위한 설정
 
+    ```shell
+    # ui-kit의 global.css에 공통 css 작성
+    pnpm --filter @career-up/ui-kit build
+    # 이후 shell에서 사용할 global css를 index.css에 작성 후 layout.tsx에 적용
+    pnpm dev
+    ```
+
 -   App Shell의 인증 처리
 
 ### 마이크로 앱 만들기 1 (포스팅)
