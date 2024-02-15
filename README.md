@@ -1898,6 +1898,27 @@
     # 위에 작성해둔 shell router의 test function이 잘 호출되고 실행되는지 확인
     ```
 
+-   react-router-dom 을 통한 내비게이션 구현
+
+    ```shell
+    pnpm --filter @career-up/shell-router add react-router-dom
+    # shell-router의 vite.config.ts에 react-router-dom도 rollupOptions에 추가
+    # 이제 navigation 구현을 위해 types.ts, router.ts, injector.tsx, use-shell-event.ts, use-app-event.ts, app-routing-manager.tsx를 생성
+    # useShellEvent, injectFactory, AppRoutingManager를 index.ts에서 export 해줌
+    pnpm --filter @career-up/shell-router build
+    cd apps
+    pnpm create mf-app # (posting, port 3001)
+    cd ..
+    pnpm i
+    pnpm --filter @career-up/posting add react-router-dom
+    pnpm --filter @career-up/shell add react-router-dom
+    pnpm dev
+    ```
+
+-   공통 레이아웃 설정 및 스타일 충돌 해결을 위한 설정
+
+-   App Shell의 인증 처리
+
 ### 마이크로 앱 만들기 1 (포스팅)
 
 ### 마이크로 앱 만들기 2 (교육)
