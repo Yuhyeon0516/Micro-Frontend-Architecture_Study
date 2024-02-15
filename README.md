@@ -1926,6 +1926,14 @@
 
 -   App Shell의 인증 처리
 
+    -   https://auth0.com SaaS를 이용할 예정
+
+    ```shell
+    pnpm --filter @career-up/shell add @auth0/auth0-react
+    pnpm --filter @career-up/shell add @types/node -D
+    pnpm --filter @career-up/shell add @babel/runtime -D
+    ```
+
 ### 마이크로 앱 만들기 1 (포스팅)
 
 ### 마이크로 앱 만들기 2 (교육)
