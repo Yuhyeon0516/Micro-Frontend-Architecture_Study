@@ -1729,7 +1729,7 @@
 
     -   pnpm workspace + turborepo를 사용하여 구현 예정
 
-        ![1]()
+        ![1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/55d961cd-9713-4817-92a4-24c21865f177)
 
 -   모노레포 환경 구축(pnpm workspace, turborepo)
 
