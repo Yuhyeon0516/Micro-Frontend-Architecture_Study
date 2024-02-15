@@ -1723,6 +1723,64 @@
     -   가이드를 벗어나지 않는 선에서는 각자의 마이크로 앱이 sass 를 사용하거나 css module 을 사용해도 전혀 문제가 없음
     -   ui-kit 패키지에서 공유되는 컴포넌트들은 특정 기술(emotion 등)에 의존적이지 않도록 기본적인 기술로만 작성
 
+### 프로젝트 모노레포 설계
+
+-   모노레포 도입 여부 결정 및 구현 방식 결정
+
+    -   pnpm workspace + turborepo를 사용하여 구현 예정
+
+        ![1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/55d961cd-9713-4817-92a4-24c21865f177)
+
+-   모노레포 환경 구축(pnpm workspace, turborepo)
+
+    ```shell
+    mkdir career-up
+    cd career-up
+    pnpm init
+    corepack use pnpm@8.15.1
+    # pnpm-workspace.yaml 설정
+    '''
+    packages:
+    - "apps/*"
+    - "packages/*"
+    '''
+    mkdir apps
+    cd apps
+    pnpm create mf-app # (shell, port 3000)
+    cd ..
+    pnpm i
+    pnpm -w add turbo -D
+    # turbo.json 설정
+    '''
+    {
+        "$schema": "https://turbo.build/schema.json",
+        "pipeline": {
+            "build": {
+                "dependsOn": ["^build"],
+                "outputs": ["dist/**"]
+            },
+            "start:live": {
+                "cache": false,
+                "persistent": true
+            },
+            "build:start": {
+                "cache": false,
+                "persistent": true
+            }
+        }
+    }
+    '''
+    # root의 package.json에 script 추가
+    '''
+    "scripts": {
+        "dev": "turbo start:live",
+        "build": "turbo build",
+        "serve": "turbo build:start"
+    },
+    '''
+    pnpm dev
+    ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(공통 모듈 및 마이크로 앱 구현)
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(통합 및 빌드)
