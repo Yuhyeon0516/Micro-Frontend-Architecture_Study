@@ -1936,6 +1936,26 @@
 
 ### 마이크로 앱 만들기 1 (포스팅)
 
+-   API 서버 생성 및 설정
+
+    ```shell
+    # pnpm-workspace.yaml에 server workspace 추가
+    mkdir server
+    cd server
+    pnpm init
+    cd ..
+    pnpm --filter @career-up/server add json-server@^0.17.4
+    # server/db.json을 생성
+    # server/index.js에 서버를 구성
+    pnpm --filter @career-up/server start:live
+    ```
+
+-   포스팅 서비스 개발하기
+
+    ```shell
+
+    ```
+
 ### 마이크로 앱 만들기 2 (교육)
 
 ### 마이크로 앱 만들기 3 (인맥)
@@ -1961,3 +1981,31 @@
 ### 배포 전략 설정
 
 ### 장애 대응
+
+## 사례로 배우는 모놀리식에서 마이크로 프론트엔드로의 점진적 전환
+
+-   시나리오 소개(FE 모놀리식 SPA, BE 마이크로 서비스)
+-   모노레포 안의 패키지 분리(Feat. TypeScript)
+-   단순 코드 분할에서 의존성 정리 및 패키지 계층 분리(Feat. TypeScript)
+-   빌드 타임 코드 공유에서 패키지 빌드 후 공유로 점진적 전환
+-   런타임 공유 패키지와 마이크로 앱 분할 및 독립 개발 환경 구축
+
+## 런타임 인젝션 통합방식을 활용한 카카오의 MFA
+
+### 모두의 MFA, Legacy에서도 적용하는 마이크로 프론트엔드
+
+### 실습 환경 및 초기 셋팅
+
+### 스타일 격리를 위한 실습
+
+### runtime injection을 위한 webpack 설정
+
+### antd, redux를 활용한 MailList 컴포넌트 작성
+
+### tailwind, zustand를 활용한 ShoppingList 컴포넌트 작성
+
+### Routing을 통한 서로 다른 프로젝트에서의 MFA Component 사용
+
+### legacy 환경 프로젝트 구축
+
+### legacy 에서의 MFA
