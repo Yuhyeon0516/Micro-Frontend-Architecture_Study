@@ -1953,7 +1953,24 @@
 -   포스팅 서비스 개발하기
 
     ```shell
-
+    pnpm --filter @career-up/posting add @auth0/auth0-spa-js
+    pnpm --filter @career-up/posting add @types/node -D
+    # typescript 버젼 통일화 (이번 프로젝트는 5.2.2로 통일함)
+    pnpm i
+    # career-up.code-workspace을 설정
+    # posting/src/provider/aut0-client-provider.tsx 작성
+    # posting/src/hooks/use-auth0-client.tsx 작성
+    # posting/webpack.config.js의 shared option에 @auth0/auth0-react의 singleton을 true로 설정
+    # posting/routes.tsx에서 element를 Auth0ClientProvider로 감싸기
+    pnpm --filter @career-up/posting add @babel/runtime
+    pnpm dev
+    pnpm --filter @career-up/posting add eslint eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+    # posting/.eslintrc.js에서 eslint 설정
+    # posting/src/types.ts에 api 요청에 필요한 type 작성
+    # posting/src/apis.ts에 api 요청에 필요한 function을 작성
+    # posting/components에 profile, post, write-post component를 작성
+    # 위에 작성된 component를 바탕으로 page-home 구성
+    pnpm dev
     ```
 
 ### 마이크로 앱 만들기 2 (교육)
@@ -1983,6 +2000,8 @@
 ### 장애 대응
 
 ## 사례로 배우는 모놀리식에서 마이크로 프론트엔드로의 점진적 전환
+
+### 사례로 배우는 모놀리식에서 마이크로 프론트엔드로의 점진적 전환
 
 -   시나리오 소개(FE 모놀리식 SPA, BE 마이크로 서비스)
 -   모노레포 안의 패키지 분리(Feat. TypeScript)
