@@ -1975,6 +1975,29 @@
 
 ### 마이크로 앱 만들기 2 (교육)
 
+-   기술 스택 선정 및 패키지 생성 및 설정
+
+    -   edu에서는 jotai(상태관리)와 emotion(css)을 사용해보려한다.
+
+    ```shell
+    cd apps
+    pnpm create mf-app # (edu, port 3002)
+    # apps/edu/package.json의 dependencies에 @career-up/shell-router와 @career-up/ui-kit 추가
+    # typescript 버젼 5.2.2로 수정
+    pnpm i
+    pnpm --filter @career-up/edu add react-router-dom @auth0/auth0-spa-js @babel/runtime
+    pnpm --filter @career-up/edu add @types/node eslint eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+    # apps/edu/.eslintrc.js에 eslint 설정
+    # apps/edu/webpack.config.js에 shared option과 exposes 설정
+    # 추가로 .env의 path를 통일하기 위해 shell, posting, edu의 webpack.config.js의 Dotenv의 path를 root로 변경
+    # routes, injector, bootstrap, provider, hook 등 프로젝트에 기본적으로 필요한 환경을 구성
+    pnpm --filter @career-up/edu add @emotion/styled @emotion/react jotai
+    # server/db.json에 courses와 course_contents를 추가
+    pnpm dev
+    ```
+
+-   교육 컨탠츠 서비스 개발하기
+
 ### 마이크로 앱 만들기 3 (인맥)
 
 ### 마이크로 앱 만들기 4 (채용)
