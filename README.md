@@ -1998,6 +1998,14 @@
 
 -   교육 컨탠츠 서비스 개발하기
 
+    ```shell
+    # API 코드 작성(types.ts, apis.ts)
+    # 공통 Layout 처리(routes.tsx, layout.styles.ts, atoms.ts, layout.tsx, profile.styles.ts, profile.tsx, profile-container.tsx, my-course-info.styles.ts, my-course-info.tsx, my-course-info-container.tsx)
+    # 리스트 페이지 작업(page-list.tsx, course-list-item.styles.ts, course-list-item.tsx, routes.tsx)
+    # 디테일 페이지 작업(page-detail.tsx, course-detail-item.styles.ts, course-detail-item.tsx, page-detail.tsx, courese-contents.styles.ts, course-contents.tsx, course-actions.styles.ts, course-actions.tsx, routes.tsx)
+    pnpm dev
+    ```
+
 ### 마이크로 앱 만들기 3 (인맥)
 
 ### 마이크로 앱 만들기 4 (채용)
