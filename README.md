@@ -2050,6 +2050,32 @@
 
 -   기술 스택 선정 및 패키지 생성 및 설정
 
+    -   채용 앱은 redux(상태관리)와 emotion(css)를 사용할 예정이다.
+
+    ```shell
+    cd apps
+    pnpm create mf-app(job, port 3004)
+    cd ..
+    # code-workspace에 job 추가
+    # package.json 설정
+    pnpm i
+    pnpm --filter @career-up/job add react-router-dom @auth0/auth0-spa-js @babel/runtime
+    pnpm --filter @career-up/job add @types/node eslint eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+    # .eslintrc.js 설정
+    # webpack.config.js의 plugin에 Dotenv option에 path 추가
+    # webpack.config.js의 exposes option에 injector 추가
+    # webpack.config.js에 shared option 수정
+    # 기본적인 앱의 설정을 위해 코드 작성(hooks/use-auth0-client.ts, providers/auth0-client-provider.tsx, bootstrap.tsx, index.ts, injector.tsx, routes.tsx)
+    # shell app의 webpack.config.js내 remotes option에 job path 추가
+    # shell app의 tsconfig.json내 paths option에 job/injector에 대한 path 추가
+    # shell app에 job app을 연결해줄 app-job.tsx를 작성
+    # shell app의 router에 job app 연결
+    pnpm dev
+    pnpm --filter @career-up/job add @emotion/styled @emotion/react @reduxjs/toolkit react-redux
+    # server app에 job 대한 데이터 반환을 위한 api 작성
+    # server app에 db.json에 jobs 추가
+    ```
+
 -   채용 공고 서비스 개발하기
 
 ### 프레그먼트 만들기

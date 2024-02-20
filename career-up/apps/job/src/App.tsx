@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import './index.scss'
+import './index.css'
 
 const App = () => (
-  <div className="mt-10 text-3xl mx-auto max-w-6xl">
-    <div>Name: network</div>
+  <div className="container">
+    <div>Name: job</div>
     <div>Framework: react</div>
     <div>Language: TypeScript</div>
-    <div>CSS: Tailwind</div>
+    <div>CSS: Empty CSS</div>
   </div>
 )
 const rootElement = document.getElementById('app')
