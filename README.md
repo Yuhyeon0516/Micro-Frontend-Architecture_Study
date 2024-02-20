@@ -2078,6 +2078,14 @@
 
 -   채용 공고 서비스 개발하기
 
+    ```shell
+    # job app API 코드 작성(types.ts, apis.ts)
+    # 공통 Layout 처리를 위한 코드 작성(routes.tsx, components/layout.styles.ts, components/layout.tsx, redux/create.ts, redux/utils.ts, redux/modules/applyStatus.ts, redux/modules/rootReducer.ts, containers/apply-status-container.tsx, components/apply-status.styles.ts, components/apply-status.tsx)
+    # 리스트 페이지 작업을 위한 코드 작성(pages/page-list.tsx, redux/modules/jobs.ts, redux/modules/rootReducer.ts, containers/job-list-container.tsx, components/job-list.styles.ts, components/job-list.tsx, components/job-list-item.styles.ts, components/job-list-item.tsx, assets/icon-default.tsx, routes.tsx)
+    # 디테일 페이지 작업을 위한 코드 작성(pages/page-detail.tsx, routes.tsx)
+    pnpm dev
+    ```
+
 ### 프레그먼트 만들기
 
 -   프레그먼트 공유를 위한 준비
