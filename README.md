@@ -2090,6 +2090,17 @@
 
 -   프레그먼트 공유를 위한 준비
 
+    ```shell
+    pnpm --filter @career-up/shell-router add @auth0/auth0-spa-js
+    # shell-router로 Auth0ClientProvider와 useAuth0Client 이동 작업을 위한 코드 작성(providers/auth0-client-provider.tsx, hooks/use-auth0-client.ts, index.ts, package.json, vite.config.ts)
+    pnpm --filter @career-up/shell-router build
+    # 마이크로앱에서 Auth0ClientProvider 와 useAuth0Client 사용 변경(각 마이크로앱에 Auth0ClientProvider와 useAuth0Client를 전부 shell-router에서 가져오게 변경)
+    # 마이크로 앱 간 이동을 위한 useShellNavigate 작성(hooks/use-shell-navigate-listener.tsx, hooks/use-shell-navigate.tsx, index.ts)
+    pnpm --filter @career-up/shell-router build
+    # shell의 layout.tsx에 useShellNavigateListener 등록
+    pnpm dev
+    ```
+
 -   일촌 맺기 프레그먼트 컴포넌트 작성
 
 -   추천 채용 공고 프레그먼트 컴포넌트 작성

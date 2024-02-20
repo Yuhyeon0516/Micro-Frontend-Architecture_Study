@@ -1,14 +1,12 @@
-// career-up/apps/posting/src/pages/page-home.tsx
-
 import "./page-home.scss";
 
 import React, { useEffect, useState } from "react";
-import useAuth0Client from "../hooks/use-auth0-client";
 import Profile from "../components/profile";
-import { type PostType } from "../types";
-import { createPost, getPosts, removePost } from "../apis";
 import Post from "../components/post";
 import WritePost from "../components/write-post";
+import { createPost, getPosts, removePost } from "../apis";
+import { type PostType } from "../types";
+import { useAuth0Client } from "@career-up/shell-router";
 
 const PageHome: React.FC = () => {
     const auth0Client = useAuth0Client();
