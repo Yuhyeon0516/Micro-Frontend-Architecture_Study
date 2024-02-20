@@ -2033,11 +2033,18 @@
     pnpm dev
     # network app의 전역 스타일 오염 방지를 위해 index.scss를 설정
     pnpm --filter @career-up/network add recoil
-    # server app에 network에 대한 데이터 요청을 위한 api 작성
+    # server app에 network에 대한 데이터 반환을 위한 api 작성
     # server app에 db.json에 connections 추가
     ```
 
 -   인맥 관리 서비스 개발하기
+
+    ```shell
+    # network app에 api 요청을 위한 코드 작성(types.ts, apis.ts)
+    # 공통 Layout 처리를 위한 코드 작성(styles/f.css.ts, index.scss, components/layout.css.ts, components/layout.tsx, containers/my-network-container.tsx, components/my-network.css.ts, components/my-network.tsx, atoms.ts, routes.tsx)
+    # network app의 홈 페이지 작업(atoms.ts, pages/page-home.tsx, components/manage-connection.css.ts, components/manage-connection.tsx, containers/connections-container.tsx, components/connections.css.ts, components/connections.tsx, components/connection.css.ts, components/connection.tsx, assets/icon-default.tsx, routes.tsx)
+    pnpm dev
+    ```
 
 ### 마이크로 앱 만들기 4 (채용)
 
