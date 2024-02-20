@@ -2008,9 +2008,52 @@
 
 ### 마이크로 앱 만들기 3 (인맥)
 
+-   기술 스택 선정 및 패키지 생성 및 설정
+
+    -   인맥 앱은 recoil(상태관리)와 tailwind(css)를 사용하려한다.
+
+    ```shell
+    cd apps
+    pnpm create mf-app(network, port 3003)
+    cd ..
+    # code-workspace에 network 추가
+    pnpm i
+    pnpm --filter @career-up/network add react-router-dom @auth0/auth0-spa-js @babel/runtime
+    pnpm --filter @career-up/network add @types/node eslint eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+    # .eslintrc.js 작성
+    # webpack.config.js의 plugin에 Dotenv option에 path 추가
+    # webpack.config.js의 exposes option에 injector 추가
+    # webpack.config.js에 shared option 수정
+    # tailwind.config.js에 prefix 추가
+    # 기본적인 앱의 설정을 위해 코드 작성(hooks/use-auth0-client.ts, providers/auth0-client-provider.tsx, bootstrap.tsx, index.ts, injector.tsx, routes.tsx)
+    # shell app의 webpack.config.js내 remotes option에 network path 추가
+    # shell app의 tsconfig.json내 paths option에 network/injector에 대한 path 추가
+    # shell app에 network app을 연결해줄 app-network.tsx를 작성
+    # shell app의 router에 network app 연결
+    pnpm dev
+    # network app의 전역 스타일 오염 방지를 위해 index.scss를 설정
+    pnpm --filter @career-up/network add recoil
+    # server app에 network에 대한 데이터 요청을 위한 api 작성
+    # server app에 db.json에 connections 추가
+    ```
+
+-   인맥 관리 서비스 개발하기
+
 ### 마이크로 앱 만들기 4 (채용)
 
+-   기술 스택 선정 및 패키지 생성 및 설정
+
+-   채용 공고 서비스 개발하기
+
 ### 프레그먼트 만들기
+
+-   프레그먼트 공유를 위한 준비
+
+-   일촌 맺기 프레그먼트 컴포넌트 작성
+
+-   추천 채용 공고 프레그먼트 컴포넌트 작성
+
+-   프레그먼트 사용하기
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(통합 및 빌드)
 
