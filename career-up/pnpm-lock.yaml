@@ -560,6 +560,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.10.4
         version: 7.23.3(@babel/core@7.23.9)
+      '@types/node':
+        specifier: ^20.11.18
+        version: 20.11.18
       '@types/react':
         specifier: ^18.2.0
         version: 18.2.55
