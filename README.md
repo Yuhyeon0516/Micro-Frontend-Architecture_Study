@@ -2168,6 +2168,19 @@
 
 ### 개발 후 배포 과정 시뮬레이션
 
+-   마이크로 앱 추가 개발 후 배포 범위 설정 및 배포
+
+    ```shell
+    # monorepo 에 패키지 빌드 스크립트 추가
+    pnpm -w build:packages
+    # app 과 fragment 에 빌드 전 패키지 빌드 스크립트 추가
+    # 환경 변수로 리모트 URL 및 서버 URL 관리
+    pnpm --filter @career-up/fragment-recommend-connections add dotenv-webpack @types/node -D
+    # 불필요한 webpack remote 제거
+    pnpm build
+    pnpm dev
+    ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(운영)
 
 ### 성능 최적화 고려하여 운영하기

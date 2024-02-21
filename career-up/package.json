@@ -6,6 +6,8 @@
     "scripts": {
         "dev": "turbo start:live",
         "build": "turbo build",
+        "build:start": "turbo build:start",
+        "build:packages": "turbo build --filter=shell-router --filter=ui-kit",
         "serve": "turbo build:start"
     },
     "keywords": [],
