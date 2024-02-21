@@ -2144,6 +2144,28 @@
 
 ### Module Federation으로 제작된 마이크로 앱 빌드 및 배포
 
+-   마이크로 앱과 프레그먼트 공유를 위한 모듈 페더레이션 설정
+
+    ```shell
+    # shell-router에서 injector에 대한 타입을 export하기 위해 type을 작성(types.ts)
+    pnpm --filter @career-up/shell-router build
+    pnpm --filter @career-up/shell add @module-federation/utilities
+    # shell 앱의 remoteEntry에 lazy 로딩을 importRemote로 변경(router.tsx, components/app-edu.tsx, components/app-job.tsx, components/app-network.tsx, components/app-posting.tsx)
+    pnpm --filter @career-up/server start:live
+    pnpm --filter @career-up/shell build
+    pnpm --filter @career-up/shell build:start
+    pnpm --filter @career-up/posting add @module-federation/utilities react-error-boundary
+    # posting 에 error 처리 및 리로드 추가
+    pnpm --filter @career-up/posting build
+    pnpm --filter @career-up/posting build:start
+    pnpm --filter @career-up/network build
+    pnpm --filter @career-up/network build:start
+    pnpm --filter @career-up/job build
+    pnpm --filter @career-up/job build:start
+    ```
+
+-   CI/CD 파이프라인 구축 및 자동화 설정
+
 ### 개발 후 배포 과정 시뮬레이션
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(운영)
