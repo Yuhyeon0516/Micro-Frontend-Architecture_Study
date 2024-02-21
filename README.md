@@ -2103,6 +2103,23 @@
 
 -   일촌 맺기 프레그먼트 컴포넌트 작성
 
+    ```shell
+    # fragment-recommend-connections 워크스페이스 생성(pnpm-workspace.yaml에 fragments/* 추가)
+    mkdir fragments
+    cd fragments
+    pnpm create mf-app(fragment-recommend-connections, port 5001)
+    cd ..
+    # code-workspace에 fragment-recommend-connections 추가
+    pnpm i
+    pnpm --filter @career-up/fragment-recommend-connections add @auth0/auth0-spa-js @babel/runtime
+    pnpm --filter @career-up/fragment-recommend-connections add eslint eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+    # .eslintrc.js 설정
+    # webpack.config.js exposes, shared option 설정
+    # ConnectionType 작성(types.ts)
+    # API 통신을 위한 함수 작성(apis.ts)
+    # 다른 앱으로 내보낼 Container 작성(containers/recommend-connections-container.tsx, components/recommend-connections.tsx, components/recommend-connections.css, components/connection.css, components/connection.tsx)
+    ```
+
 -   추천 채용 공고 프레그먼트 컴포넌트 작성
 
 -   프레그먼트 사용하기
@@ -2124,6 +2141,10 @@
 ### 배포 전략 설정
 
 ### 장애 대응
+
+## MFA를 이용하여 커리어 플랫폼 서비스 만들기(결과물)
+
+![결과물]()
 
 ## 사례로 배우는 모놀리식에서 마이크로 프론트엔드로의 점진적 전환
 
