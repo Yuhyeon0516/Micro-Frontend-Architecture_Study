@@ -2134,6 +2134,12 @@
 
 -   프레그먼트 사용하기
 
+    ```shell
+    # posting 앱에서 fragment_recommend_connections와 job 앱을 가져와 쓸 수 있도록 설정(webpack.config.js, tsconfig.json)
+    # posting 앱의 홈페이지에서 프레그먼트들을 사용(pages/page-home.tsx, pages/page-home.scss)
+    pnpm dev
+    ```
+
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(통합 및 빌드)
 
 ### Module Federation으로 제작된 마이크로 앱 빌드 및 배포
