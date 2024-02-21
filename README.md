@@ -2103,6 +2103,8 @@
 
 -   일촌 맺기 프레그먼트 컴포넌트 작성
 
+    -   일촌 맺기 프레그먼트는 새로운 프레그먼트 앱을 만들어서 다른 앱으로 expose 할 예정이다.
+
     ```shell
     # fragment-recommend-connections 워크스페이스 생성(pnpm-workspace.yaml에 fragments/* 추가)
     mkdir fragments
@@ -2121,6 +2123,14 @@
     ```
 
 -   추천 채용 공고 프레그먼트 컴포넌트 작성
+
+    -   추천 채용 공고 프레그먼트는 job 앱에서 작성하여 다른 앱으로 expose 할 예정이다.
+
+    ```shell
+    # job 앱의 webpack.config.js내 exposes option에 프레그먼트 추가
+    # 내보낼 container 작성(fragments/recommend-jobs-container.tsx, components/recommend-jobs.styles.ts, components/recommend-jobs.tsx, components/recommend-job.styles.ts, components/recommend-job.tsx)
+    pnpm dev
+    ```
 
 -   프레그먼트 사용하기
 
