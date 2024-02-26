@@ -1990,6 +1990,17 @@
     # apps/edu/.eslintrc.js에 eslint 설정
     # apps/edu/webpack.config.js에 shared option과 exposes 설정
     # 추가로 .env의 path를 통일하기 위해 shell, posting, edu의 webpack.config.js의 Dotenv의 path를 root로 변경
+    '''env 내용
+    REACT_APP_AUTH0_DOMAIN=
+    REACT_APP_AUTH0_CLIENT_ID=
+    REACT_APP_AUTH0_CALLBACK_URL=
+    REACT_APP_MICROAPP_POSTING=
+    REACT_APP_MICROAPP_EDU=
+    REACT_APP_MICROAPP_NETWORK=
+    REACT_APP_MICROAPP_JOB=
+    REACT_APP_FRAGMENT_RECOMMEND_CONNECTIONS=
+    REACT_APP_SERVER_URL=
+    '''
     # routes, injector, bootstrap, provider, hook 등 프로젝트에 기본적으로 필요한 환경을 구성
     pnpm --filter @career-up/edu add @emotion/styled @emotion/react jotai
     # server/db.json에 courses와 course_contents를 추가
@@ -2194,6 +2205,14 @@
     pnpm --filter @career-up/posting build:start
     # webpack overlay 제거(shell의 webpack.config.js, posting의 webpack.config.js)
     pnpm dev
+    ```
+
+-   프레그먼트 추가 개발 후 배포 범위 설정 및 배포
+
+    ```shell
+    # fragment-recommend-connections 변경
+    pnpm --filter @career-up/fragment-recommend-connections add swr
+    pnpm --filter @career-up/fragment-recommend-connections build
     ```
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(운영)
