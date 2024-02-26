@@ -2270,7 +2270,7 @@
                 -   페이지의 가장 큰 콘텐츠 요소(예: 이미지, 비디오, 대형 텍스트 블록)가 화면에 나타나는데 걸리는 시간을 측정
                 -   사용자가 페이지를 방문했을 때 주요 콘텐츠가 얼마나 빨리 로드되는지를 나타냅니다. LCP 는 2.5초 이내가 이상적임
 
-                ![1]()
+                ![1](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/98c72ce1-87d8-4328-9a9e-114ac8b07636)
 
             -   First Input Delay(FID) - https://web.dev/fid/
 
@@ -2278,7 +2278,7 @@
                 -   사용자가 페이지의 어떤 요소를 처음 클릭하거나 탭할 때부터 브라우저가 그 상호작용에 응답하기 시작할 때까지의 지연 시간을 측정함
                 -   FID 는 사용자가 페이지와 상호작용할 때의 경험을 평가하며, 100밀리초 이하가 권장
 
-                ![2]()
+                ![2](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/a7b193bb-b69e-4da4-a977-857c59363bdb)
 
             -   Cumulative Layout Shift(CLS) - https://web.dev/cls/
 
@@ -2287,7 +2287,7 @@
                 -   예를 들어, 이미지나 광고가 로드되면서 텍스트가 갑자기 움직이는 것과 같은 현상을 평가함
                 -   CLS 점수는 낮을수록 좋으며, 0.1 이하가 이상적
 
-                ![3]()
+                ![3](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/f6cb0a8e-69b0-41b5-82b4-9f74d1c6b5c0)
 
             -   First Contentful Paint(FCP) - https://web.dev/fcp/
 
@@ -2295,9 +2295,9 @@
                 -   이 측정항목의 '콘텐츠'는 텍스트, 이미지 (배경 이미지 포함), \<svg> 요소 또는 흰색이 아닌 \<canvas> 요소를 의미
                 -   우수한 사용자 환경을 제공하려면 사이트의 첫 콘텐츠 페인트가 1.8초 이하여야함
 
-                ![4]()
+                ![4](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/706c4d67-0919-475e-b9a1-1d0a4835adb9)
 
-                ![5]()
+                ![5](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/837d58e7-6dc3-4657-b49d-c02b0696f51e)
 
             -   Interaction to Next Paint(INP) - https://web.dev/inp/
 
@@ -2305,7 +2305,7 @@
                 -   INP 는 사용자가 페이지를 방문하는 전체 기간에 발생하는 모든 클릭, 탭, 키보드 상호작용의 지연 시간을 관찰하여 사용자 상호작용에 대한 페이지의 전반적인 응답성을 평가하는 측정항목임
                 -   최종 INP 값은 관찰된 가장 긴 상호작용이며 이상점을 무시함
 
-                ![6]()
+                ![6](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/def6fd54-a4ed-4dd4-98b4-ea0d9153f3c3)
 
             -   TTFB(Time to First Byte) - https://web.dev/ttfb/
 
@@ -2314,9 +2314,9 @@
                 -   TTFB 는 콘텐츠가 포함된 첫 페인트 (FCP) 및 최대 콘텐츠 렌더링 시간 (LCP) 과 같은 사용자 중심 측정항목보다 우선하므로, 서버가 탐색 요청에 충분히 빠르게 응답하는 것이 좋음
                 -   대략적으로 대부분의 사이트는 첫 바이트까지의 시간이 0.8초 이하여야 함
 
-                ![7]()
+                ![7](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/2c32b71a-806b-4858-ac5f-2e82bdc1c435)
 
-                ![8]()
+                ![8](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/74c5f772-f6e2-4625-8c00-270d85f2ec35)
 
     -   [pagespeed.dev](https://pagespeed.web.dev)에서 위와 같은 지표를 모두 확인할 수 있음
 
