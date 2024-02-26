@@ -2346,6 +2346,7 @@
             -   Chrome 확장 프로그램으로 Lighthouse 실행
 
 -   Chrome Performance Tab 활용하기
+
     -   Performance Tab?
         -   Chrome Performance Tab 은 Chrome 브라우저의 개발자 도구(DevTools) 에 내장된 기능
         -   웹 페이지의 로딩 성능, 실행 시간, 그래픽 처리 등을 실시간으로 분석하고 시각화함
@@ -2364,6 +2365,23 @@
         -   네트워크 요청: 페이지 로드 시 HTTP 요청의 순서와 시간을 확인
         -   자바스크립트 실행 시간: 스크립트 실행에 걸린 시간과 영향을 평가
         -   렌더링 성능: 레이아웃 변화, 페인트, 합성 과정을 분석
+
+-   React Developer Tools 활용하기
+    -   React Developer Tools?
+        -   React Developer Tools 는 React 애플리케이션을 개발하고 디버깅할 때 사용되는 Chrome 과 Firefox의 브라우저 확장 프로그램
+        -   이 도구를 통해 개발자는 React 컴포넌트의 상태, props, 컴포넌트 트리 등을 직접적으로 검사하고 수정할 수 있음
+    -   React Developer Tools 의 주요 기능
+        -   컴포넌트 트리 검사: 화면에 렌더링된 컴포넌트의 계층 구조를 확인하고 검사
+        -   상태 및 Props 확인 및 수정: 선택한 컴포넌트의 상태(state) 와 속성(props) 을 검사하고 실시간으로 수정할 수 있음
+        -   퍼포먼스 분석: 컴포넌트 렌더링 성능을 분석하고, 불필요한 렌더링을 식별
+    -   React Developer Tools 설치 및 사용 방법
+        -   설치
+            -   Chrome이나 Firefox 브라우저에서 'React Developer Tools' 확장 프로그램을 설치
+        -   사용 방법
+            -   브라우저에서 React 애플리케이션을 열고, 개발자 도구(F12 또는 Ctrl+Shift+I / Cmd+Option+I)를 오픈
+            -   개발자 도구에서 Components 탭을 선택하여 React 컴포넌트 트리를 검사
+            -   컴포넌트를 선택하여 상세 정보(상태, props 등)를 확인하고 필요한 경우 수정
+            -   Profiler 탭을 사용하여 애플리케이션의 렌더링 성능을 분석
 
 ### 보안 이슈
 
