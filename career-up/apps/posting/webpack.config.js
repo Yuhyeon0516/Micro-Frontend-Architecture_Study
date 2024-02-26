@@ -14,6 +14,13 @@ module.exports = (_, argv) => ({
     devServer: {
         port: 3001,
         historyApiFallback: true,
+        client: {
+            overlay: {
+                errors: true,
+                warnings: false,
+                runtimeErrors: true,
+            },
+        },
     },
 
     module: {
@@ -65,6 +72,7 @@ module.exports = (_, argv) => ({
                 },
                 "@auth0/auth0-react": {
                     singleton: true,
+                    shareScope: "v2",
                 },
             },
         }),
