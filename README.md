@@ -2166,10 +2166,6 @@
 
 -   CI/CD 파이프라인 구축 및 자동화 설정
 
-### 개발 후 배포 과정 시뮬레이션
-
--   마이크로 앱 추가 개발 후 배포 범위 설정 및 배포
-
     ```shell
     # monorepo 에 패키지 빌드 스크립트 추가
     pnpm -w build:packages
@@ -2178,6 +2174,25 @@
     pnpm --filter @career-up/fragment-recommend-connections add dotenv-webpack @types/node -D
     # 불필요한 webpack remote 제거
     pnpm build
+    pnpm dev
+    ```
+
+### 개발 후 배포 과정 시뮬레이션
+
+-   마이크로 앱 추가 개발 후 배포 범위 설정 및 배포
+
+    ```shell
+    # 공통 컴포넌트인 Profile 컴포넌트를 ui-kit으로 이동
+    pnpm --filter @career-up/ui-kit add @auth0/auth0-spa-js -D
+    # Profile.module.css, Profile.tsx를 ui-kit에 작성
+    pnpm --filter @career-up/ui-kit build
+    # Edu 앱의 Profile을 ui-kit에서 가져오게 변경(profile-container.tsx)
+    pnpm --filter @career-up/edu build
+    pnpm --filter @career-up/edu build:start
+    # Posting 앱의 Profile을 ui-kit에서 가져오게 변경(profile-container.tsx)
+    pnpm --filter @career-up/posting build
+    pnpm --filter @career-up/posting build:start
+    # webpack overlay 제거(shell의 webpack.config.js, posting의 webpack.config.js)
     pnpm dev
     ```
 
