@@ -2321,6 +2321,7 @@
     -   [pagespeed.dev](https://pagespeed.web.dev)에서 위와 같은 지표를 모두 확인할 수 있음
 
 -   Lighthouse 도구 사용하기
+
     -   Lighthouse란?
         -   Lighthouse 는 Google 이 개발한 오픈 소스, 자동화된 웹사이트 성능 평가 도구
         -   웹 애플리케이션의 성능, 접근성, 검색 엔진 최적화(SEO), 그리고 프로그레시브 웹 앱(PWA) 준수 여부를 분석
@@ -2343,6 +2344,26 @@
         -   웹 UI 에서 아무것도 설치하지 않고 Lighthouse 를 실행하고 보고서에 연결
             -   PageSpeed Insights 에서 Lighthouse 결과를 확인할 수 있음
             -   Chrome 확장 프로그램으로 Lighthouse 실행
+
+-   Chrome Performance Tab 활용하기
+    -   Performance Tab?
+        -   Chrome Performance Tab 은 Chrome 브라우저의 개발자 도구(DevTools) 에 내장된 기능
+        -   웹 페이지의 로딩 성능, 실행 시간, 그래픽 처리 등을 실시간으로 분석하고 시각화함
+    -   Performance Tab 의 주요 기능
+        -   타임라인 뷰: 페이지 로드와 상호작용에 대한 시간별 세부 사항을 제공함
+        -   프레임 레이트 차트: 페이지의 프레임 속도를 시각화하여, 원활한 애니메이션과 상호작용을 확인할 수 있음
+        -   CPU 및 네트워크 리소스 사용량: 자바스크립트 실행, 스타일 계산, 렌더링, 리소스 로딩 등의 CPU 사용량과 네트워크 활동을 보여줌
+    -   Performance Tab 사용 방법
+        -   Chrome 브라우저에서 F12 또는 Ctrl + Shift + I (Windows), Cmd + Option + I (Mac)를 눌러 개발자 도구를 오픈함
+        -   상단 메뉴에서 Performance 탭을 선택
+        -   성능 기록 시작 및 분석
+        -   페이지를 새로 고치기 전에 Record 버튼을 클릭하여 성능 기록을 시작
+        -   페이지 로드 또는 관심 있는 상호작용을 수행한 후, Stop 버튼을 클릭하여 기록을 종료
+        -   타임라인 뷰와 각종 차트를 통해 성능 데이터를 분석
+    -   Performance Tab 분석 포인트
+        -   네트워크 요청: 페이지 로드 시 HTTP 요청의 순서와 시간을 확인
+        -   자바스크립트 실행 시간: 스크립트 실행에 걸린 시간과 영향을 평가
+        -   렌더링 성능: 레이아웃 변화, 페인트, 합성 과정을 분석
 
 ### 보안 이슈
 
