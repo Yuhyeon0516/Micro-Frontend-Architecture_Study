@@ -2529,7 +2529,7 @@
 
 ## MFA를 이용하여 커리어 플랫폼 서비스 만들기(결과물)
 
-![결과물]()
+![결과물](https://github.com/Yuhyeon0516/Micro-Frontend-Architecture_Study/assets/120432007/e8723ef7-5d01-4f67-aaaa-f57ea08a87f5)
 
 ## 사례로 배우는 모놀리식에서 마이크로 프론트엔드로의 점진적 전환
 
